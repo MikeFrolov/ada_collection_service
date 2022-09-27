@@ -1,5 +1,6 @@
 from django.db import models
 from apps.clients.models import Client
+from .choices import CURRENCIES
 
 
 class Debt(models.Model):
@@ -7,7 +8,7 @@ class Debt(models.Model):
     contract_origin_number = models.CharField(max_length=20, blank=False, null=False,
                                               verbose_name="Оригінальний номер договору")
     client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name="Клієнт")
-    currency = models.CharField(max_length=50, null=True, blank=True, verbose_name="Валюта")
+    currency = models.CharField(max_length=4, choices=CURRENCIES, verbose_name="Валюта")
     commission = models.IntegerField(null=False, blank=False, verbose_name="Комісія")
 
     date_of_creation = models.DateField(null=False, blank=False, verbose_name="Дата заключення договору")
