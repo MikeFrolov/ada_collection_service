@@ -2,6 +2,7 @@ from django.db import models
 from .choices import CURRENCIES, TYPE_CONTRACTOR
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils import timezone
+from datetime import datetime
 
 
 class Person(models.Model):
@@ -78,17 +79,20 @@ class Client(Person):
     addresses = models.JSONField(null=True, blank=True, verbose_name="Адреси")
     employer = models.CharField(max_length=255, null=True, blank=True, verbose_name="Роботодавець")
     created_date = models.DateTimeField(default=timezone.now, verbose_name="Дата внесення в реєстр")
-    update_date = models.DateTimeField(blank=False, null=False, verbose_name="Дата оновлення")
-    number_of_debts = models.IntegerField(null=True, blank=True, verbose_name="Кількість справ")
+    update_date = models.DateTimeField(blank=True, null=True, verbose_name="Дата оновлення")
+    # number_of_debts = models.IntegerField(null=True, blank=True, verbose_name="Кількість справ")
     comment = models.TextField()
 
-    def update(self):
-        self.update_date = timezone.now()
-        self.save()
+    # def update(self):
+    #     self.update_date = timezone.now()
+    #     self.save()
 
     def __str__(self):
-        return f"{self.last_name} {self.first_name} {self.patronymic}, ІПН: {self.ipn}, " \
-               f"Кількість справ: {self.number_of_debts}"
+        return f"{self.last_name} {self.first_name} {self.patronymic}, ІПН: {self.ipn}"
+
+    def save(self, *args, **kwargs) :
+        self.last_updated_dt = datetime.now()
+        super().save(*args, **kwargs)
 
 
 class Contractor(models.Model):
@@ -104,11 +108,11 @@ class Contractor(models.Model):
     title = models.CharField(max_length=50, null=False, blank=False, verbose_name="Назва компанії")
     email = models.EmailField(max_length=255, verbose_name="Електронна пошта")
     phone = PhoneNumberField(null=True, blank=False, unique=True, verbose_name="Номер телефону")
-    address = models.JSONField(blank=True, verbose_name="Адреса")
-    post_address = models.JSONField(blank=True, verbose_name="Поштова адреса")
+    address = models.JSONField(null=True, blank=True, verbose_name="Адреса")
+    post_address = models.JSONField(null=True, blank=True, verbose_name="Поштова адреса")
 
     def __str__(self):
-        return f"{self.title}"
+        return f"{self.title}, {self.type}"
 
 
 class ContractorManager(Person):
@@ -121,22 +125,24 @@ class ContractorManager(Person):
     position = models.CharField(max_length=50, null=False, blank=False, verbose_name="Посада")
     contractor = models.ForeignKey(Contractor, on_delete=models.CASCADE, verbose_name="Контрагент")
 
+    def __str__(self):
+        return f"{self.id}, {self.last_name} {self.first_name}, {self.contractor}"
+
 
 class Debt(models.Model):
     """Справа(Договір)"""
 
     class Meta:
-        db_table = "debts"
+        db_table = "debt"
         verbose_name = "Справа"
         verbose_name_plural = "Справи"
 
     # contract_sys_number = models.IntegerField(primary_key=True, verbose_name="Номер договору в системі")
     contract_origin_number = models.CharField(max_length=20, blank=False, null=False,
                                               verbose_name="Оригінальний номер договору")
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name="Клієнт")
+    client = models.ForeignKey(Client, on_delete=models.RESTRICT, verbose_name="Клієнт")
     currency = models.CharField(max_length=4, choices=CURRENCIES, verbose_name="Валюта")
     commission = models.IntegerField(null=False, blank=False, verbose_name="Комісія")
-
     date_of_creation = models.DateField(null=False, blank=False, verbose_name="Дата заключення договору")
     end_date = models.DateField(null=False, blank=False, verbose_name="Дата закінчення договору")
     initial_amount = models.IntegerField(null=False, blank=False, verbose_name="Початкова сума")
@@ -154,12 +160,12 @@ class Debt(models.Model):
     days_overdue = models.IntegerField(verbose_name="Кількість днів просрочки")
     credit_company = models.CharField(max_length=50, null=True, blank=True, verbose_name="Кредитна компанія")
     credit_brand = models.CharField(max_length=50, null=True, blank=True, verbose_name="Кредитний бренд")
-    title_counterparty = models.CharField(max_length=50, null=True, blank=True, verbose_name="Назва контрагента")
-    id_counterparty = models.CharField(max_length=50, null=True, blank=True, verbose_name="ID контрагента")
+    title_contractor = models.ForeignKey(Contractor, on_delete=models.RESTRICT, verbose_name="Назва контрагента")
+    # contractor_manager = models.ForeignKey(ContractorManager, on_delete=models.RESTRICT, verbose_name="Менеджер контрагента")
 
     def update(self):
         self.update_date = timezone.now()
         self.save()
 
     def __str__(self):
-        return f"{self.id}, {self.contract_origin_number}, {self.total_amount}грн, {self.client}"
+        return f"{self.id}, {self.contract_origin_number}, {self.current_debt}грн, {self.client}"
