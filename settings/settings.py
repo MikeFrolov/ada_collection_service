@@ -35,7 +35,7 @@ ROOT_APPS = [
     'apps.core',
     'apps.clients',
     'apps.debts',
-    'apps.contractor',
+    'apps.contractors',
 ]
 
 INSTALLED_APPS = [
