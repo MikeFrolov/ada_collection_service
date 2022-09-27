@@ -1,4 +1,5 @@
 from django.db import models
+
 from .choices import CURRENCIES, TYPE_CONTRACTOR
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils import timezone
@@ -74,7 +75,12 @@ class Client(Person):
         verbose_name_plural = "Клієнти"
 
     ipn = models.BigIntegerField(null=True, blank=True, verbose_name="ІПН")
-    passport_serial = models.CharField(max_length=10, null=True, blank=True, verbose_name="Серія паспорту")
+    passport_serial = models.CharField(
+        max_length=10,
+        null=True,
+        blank=True,
+        verbose_name="Серія паспорту"
+    )
     passport_number = models.IntegerField(blank=True, verbose_name="Номер паспорту")
     addresses = models.JSONField(null=True, blank=True, verbose_name="Адреси")
     employer = models.CharField(max_length=255, null=True, blank=True, verbose_name="Роботодавець")
@@ -90,7 +96,7 @@ class Client(Person):
     def __str__(self):
         return f"{self.last_name} {self.first_name} {self.patronymic}, ІПН: {self.ipn}"
 
-    def save(self, *args, **kwargs) :
+    def save(self, *args, **kwargs):
         self.last_updated_dt = datetime.now()
         super().save(*args, **kwargs)
 
@@ -161,7 +167,11 @@ class Debt(models.Model):
     credit_company = models.CharField(max_length=50, null=True, blank=True, verbose_name="Кредитна компанія")
     credit_brand = models.CharField(max_length=50, null=True, blank=True, verbose_name="Кредитний бренд")
     title_contractor = models.ForeignKey(Contractor, on_delete=models.RESTRICT, verbose_name="Назва контрагента")
-    # contractor_manager = models.ForeignKey(ContractorManager, on_delete=models.RESTRICT, verbose_name="Менеджер контрагента")
+    # contractor_manager = models.ForeignKey(
+    #     ContractorManager,
+    #     on_delete=models.RESTRICT,
+    #     verbose_name="Менеджер контрагента"
+    # )
 
     def update(self):
         self.update_date = timezone.now()

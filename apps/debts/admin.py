@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-from.models import Client, Contractor, Debt, ContractorManager
+from .models import Client, Contractor, Debt, ContractorManager
 
 
 @admin.register(Debt)
