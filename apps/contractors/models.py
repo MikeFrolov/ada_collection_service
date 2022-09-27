@@ -5,6 +5,13 @@ from apps.core.models import Person
 
 
 class Contractor(models.Model):
+    """Контрагент(Організація що надає справи)"""
+
+    class Meta:
+        db_table = "contractor"
+        verbose_name = "Контрагент"
+        verbose_name_plural = "Контрагенти"
+
     type = models.CharField(max_length=4, choices=TYPE_CONTRACTOR, verbose_name="Тип контрагента")
     edrpou = models.IntegerField(null=False, blank=False, verbose_name="ЄДРПОУ")
     title = models.CharField(max_length=50, null=False, blank=False, verbose_name="Назва компанії")
