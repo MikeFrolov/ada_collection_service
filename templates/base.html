@@ -19,74 +19,26 @@
         <header class="fixed-top">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container">
-                    <a class="navbar-brand" href="/"><h2>"ADA Colection"</h2></a>
+                    <a class="navbar-brand" href="/"><h2>"ADA Collection"</h2></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/admin">Admin</a>
-                            </li>
-                            {% endif %}
-                            <!--<li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Students</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                  <li><a class="dropdown-item" href="/list_students/">List students</a></li>
-                                  <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="/generate-student/">Generate student</a></li>
-                                  <li><a class="dropdown-item" href="/generate-students/?count=">Generate students</a></li>
-                                  <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="/create_student_form">Create student form</a></li>
-                                  <li><a class="dropdown-item" href="/generate_students_form/">Generate students form</a></li>
-                                </ul>
+                                <a class="nav-link active" aria-current="page" href="/admin">Адмін панель</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Teachers</a>
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Справи</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                  <li><a class="dropdown-item" href="/list_teachers/">List teachers</a></li>
+                                  <li><a class="dropdown-item" href="/list_debts/">Усі справи списком</a></li>
                                   <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="/generate-teacher/">Generate teacher</a></li>
-                                  <li><a class="dropdown-item" href="/generate-teachers/?count=">Generate teachers</a></li>
+                                  <li><a class="dropdown-item" href="/get_debt/">Пошук справи</a></li>
                                   <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="/create_teacher_form">Create teacher form</a></li>
+                                  <li><a class="dropdown-item" href="/create_debt_form">Cтворення справи</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Groups</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                    <li><a class="dropdown-item" href="/list_groups/">List groups</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="/create_group_form/">Create group form</a></li>
-                                </ul>
-                            </li>-->
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="list_debts">Debts</a>
-                            </li>
-                            <!--<li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/list_exchange_rates">Exchange rates </a>
-                            </li>-->
-                            {% if user.is_authenticated %}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><!--{{ user.username }}-->User_name</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="{% url 'change_password' %}">Change password</a></li>
-                                </ul>
-                            </li>
-                            {% else %}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">LogIn | SignIn</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                    <li><a class="dropdown-item" href="{% url 'login' %}">Log In</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="{% url 'signup' %}">Sign In</a></li>
-                                </ul>
-                            </li>
-                            {% endif %}
                         </ul>
                     </div>
 
@@ -127,7 +79,7 @@
                 <div class="container text-white bg-dark">
                     {% block footer %}
                     {% endblock %}
-                    <p align="center">© 2021 Copyright: Michail Frolov</p>
+                    <p align="center">© 2022 Copyright: Michail Frolov</p>
                 </div>
             </nav>
         </footer>-->
