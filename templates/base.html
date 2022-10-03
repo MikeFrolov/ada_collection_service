@@ -32,21 +32,40 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Справи</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                  <li><a class="dropdown-item" href="/list_debts/">Усі справи списком</a></li>
+                                  <li><a class="dropdown-item" href="/list_debts/">Список справ</a></li>
                                   <li><hr class="dropdown-divider"></li>
                                   <li><a class="dropdown-item" href="/get_debt/">Пошук справи</a></li>
                                   <li><hr class="dropdown-divider"></li>
                                   <li><a class="dropdown-item" href="/create_debt_form">Cтворення справи</a></li>
                                 </ul>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Клієнти</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                  <li><a class="dropdown-item" href="/list_clients/">Список клієнтів</a></li>
+                                  <li><hr class="dropdown-divider"></li>
+                                  <li><a class="dropdown-item" href="/get_client/">Пошук клієнта</a></li>
+                                  <li><hr class="dropdown-divider"></li>
+                                  <li><a class="dropdown-item" href="/create_client_form">Cтворення клієнта</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Контрагенти</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                  <li><a class="dropdown-item" href="/list_contractors/">Список контрагентів</a></li>
+                                  <li><hr class="dropdown-divider"></li>
+                                  <li><a class="dropdown-item" href="/get_contractor/">Пошук контрагента</a></li>
+                                  <li><hr class="dropdown-divider"></li>
+                                  <li><a class="dropdown-item" href="/create_contractor_form">Cтворення контрагента</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
-
                 </div>
             </nav>
         </header>
         <br><br><br>
-        <!--<section>
+        <section>
             <div class="message container text-center">
                 {% if messages %}
                     <div class="alert alert-dark" role="alert">
@@ -72,7 +91,7 @@
                 {% block content %}
                 {% endblock %}
             </div>
-        </section>-->
+        </section>
         <!--Footer
         <footer class="mt-auto">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

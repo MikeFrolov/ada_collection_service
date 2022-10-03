@@ -33,6 +33,9 @@ ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 
 ROOT_APPS = [
     'apps.core',
+    'apps.contractors',
+    'apps.contractor_managers',
+    'apps.clients',
     'apps.debts',
 ]
 
