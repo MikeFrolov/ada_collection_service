@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+    {% block title %}
+        Список справ
+    {% endblock %}
+    {% block page_title %}Список справ{% endblock %}
+    {% block content %}
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr class="active">
+                    <th scope="col">ID</th>
+                    <th scope="col">Оригінальний номер договору</th>
+                    <th scope="col">Клієнт</th>
+                    <th scope="col">Валюта</th>
+                    <th scope="col">Дата заключення договору</th>
+                    <th scope="col">Дата закінчення договору</th>
+                    <th scope="col">Дата останнього платежу</th>
+                    <th scope="col">Початкова сума</th>
+                    <th scope="col">Поточний борг</th>
+                    <th scope="col">Кількість днів просрочки</th>
+                    <th scope="col">Назва контрагента</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for debt in debts %}
+                <tr>
+                    <td>{{ debt.id|safe  }}</td>
+                    <td>{{ debt.contract_origin_number|safe }}</td>
+                    <td>{{ debt.client|safe }}</td>
+                    <td>{{ debt.currency|safe }}</td>
+                    <td>{{ debt.date_of_creation|safe }}</td>
+                    <td>{{ debt.end_date|safe }}</td>
+                    <td>{{ debt.last_payment_date|safe }}</td>
+                    <td>{{ debt.initial_amount|safe }}</td>
+                    <td>{{ debt.current_debt|safe }}</td>
+                    <td>{{ debt.days_overdue|safe }}</td>
+                    <td>{{ debt.title_contractor|safe }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
+    {% block footer %}
+    {% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+    {% block title %}
+        Список контрагентів
+    {% endblock %}
+    {% block page_title %}Список контрагентів{% endblock %}
+    {% block content %}
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr class="active">
+                    <th scope="col">ID</th>
+                    <th scope="col">Тип контрагента</th>
+                    <th scope="col">ЄДРПОУ</th>
+                    <th scope="col">Назва компанії</th>
+                    <th scope="col">Електронна пошта</th>
+                    <th scope="col">Номер телефону</th>
+                    <th scope="col">Адреса</th>
+                    <th scope="col">Поштова адреса</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contractor in contractors %}
+                <tr>
+                    <td>{{ contractor.id|safe  }}</td>
+                    <td>{{ contractor.type|safe }}</td>
+                    <td>{{ contractor.edrpou|safe }}</td>
+                    <td>{{ contractor.title|safe }}</td>
+                    <td>{{ contractor.email|safe }}</td>
+                    <td>{{ contractor.phone|safe }}</td>
+                    <td>{{ contractor.address|safe }}</td>
+                    <td>{{ contractor.post_address|safe }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
+    {% block footer %}
+    {% endblock %}
