@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+    {% block title %}
+        Список клієнтів
+    {% endblock %}
+    {% block page_title %}Список клієнтів{% endblock %}
+    {% block content %}
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr class="active">
+                    <th scope="col">ID</th>
+                    <th scope="col">Прізвище</th>
+                    <th scope="col">Ім'я</th>
+                    <th scope="col">По-батькові</th>
+                    <th scope="col">Дата народження</th>
+                    <th scope="col">Основний номер телефону</th>
+                    <th scope="col">Дата останнього платежу</th>
+                    <th scope="col">Електронна пошта</th>
+                    <th scope="col">Серія паспорту</th>
+                    <th scope="col">Номер паспорту</th>
+                    <th scope="col">Адреси</th>
+                    <th scope="col">Роботодавець</th>
+                    <th scope="col">Дата внесення в реєстр</th>
+                    <th scope="col">Дата оновлення</th>
+                    <th scope="col">Коментар</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for debt in debts %}
+                <tr>
+                    <td>{{ debt.id|safe  }}</td>
+                    <td>{{ debt.contract_origin_number|safe }}</td>
+                    <td>{{ debt.client|safe }}</td>
+                    <td>{{ debt.currency|safe }}</td>
+                    <td>{{ debt.date_of_creation|safe }}</td>
+                    <td>{{ debt.end_date|safe }}</td>
+                    <td>{{ debt.last_payment_date|safe }}</td>
+                    <td>{{ debt.initial_amount|safe }}</td>
+                    <td>{{ debt.current_debt|safe }}</td>
+                    <td>{{ debt.days_overdue|safe }}</td>
+                    <td>{{ debt.title_contractor|safe }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
+    {% block footer %}
+    {% endblock %}

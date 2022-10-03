@@ -1,17 +1,17 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView
-from .models import Debt
+from .models import Contractor
 
 
-class ListDebtsView(ListView):
-    template_name = 'debts/list_debts.html'
+class ListContractorsView(ListView):
+    template_name = 'contractors/list_contractors.html'
 
     def get(self, request, **kwargs):
         filter_parameters = {p: v for p, v in request.GET.items()}
 
         if not filter_parameters:  # If no filtering parameters are entered
-            debts = Debt.objects.all().order_by('id')
+            contractors = Contractor.objects.all().order_by('id')
         # TODO: Add pagination
         # FIXME: Crashes if using pagination, Conflicting requests '?page=1' and '?age = 1'
             # paginator = Paginator(students, 10)
@@ -20,5 +20,5 @@ class ListDebtsView(ListView):
         # FIXME: Crashes if trying to enter a filter that does not exist
         # TODO: Add filter name check
         else:
-            debts = [obj for obj in Debt.objects.filter(**filter_parameters).order_by('id')]
-        return render(request, self.template_name, {'debts': debts})  # List debts from database
+            contractors = [obj for obj in Contractor.objects.filter(**filter_parameters).order_by('id')]
+        return render(request, self.template_name, {'contractors': contractors})  # List contractors from database
