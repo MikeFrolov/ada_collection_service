@@ -24,7 +24,7 @@
                 {% for debt in debts %}
                 <tr>
                     <td>{{ debt.id|safe  }}</td>
-                    <td>{{ debt.contract_origin_number|safe }}</td>
+                    <td>{{ debt.origin_number|safe }}</td>
                     <td>{{ debt.client|safe }}</td>
                     <td>{{ debt.currency|safe }}</td>
                     <td>{{ debt.date_of_creation|safe }}</td>
@@ -32,7 +32,7 @@
                     <td>{{ debt.last_payment_date|safe }}</td>
                     <td>{{ debt.initial_amount|safe }}</td>
                     <td>{{ debt.current_debt|safe }}</td>
-                    <td>{{ debt.days_overdue|safe }}</td>
+                    <td>{{ debt.delay_days|safe }}</td>
                     <td>{{ debt.title_contractor|safe }}</td>
                 </tr>
             {% endfor %}

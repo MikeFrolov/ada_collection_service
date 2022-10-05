@@ -13,14 +13,14 @@ class Client(Person):
         verbose_name = "Клієнт"
         verbose_name_plural = "Клієнти"
 
-    ipn = models.BigIntegerField(null=True, blank=True, verbose_name="ІПН")
+    ipn = models.BigIntegerField(null=True, blank=True, unique=True, verbose_name="ІПН")
     passport_serial = models.CharField(
-        max_length=5,
+        max_length=2,
         null=True,
         blank=True,
         verbose_name="Серія паспорту"
     )
-    passport_number = models.IntegerField(blank=True, verbose_name="Номер паспорту")
+    passport_number = models.IntegerField(null=True, blank=True, verbose_name="Номер паспорту")
     addresses = models.JSONField(null=True, blank=True, verbose_name="Адреси")
     employer = models.CharField(max_length=255, null=True, blank=True, verbose_name="Роботодавець")
     created_date = models.DateTimeField(default=timezone.now, verbose_name="Дата внесення в реєстр")

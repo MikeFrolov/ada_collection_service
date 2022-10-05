@@ -4,6 +4,7 @@ from django.utils import timezone
 from .choices import CURRENCIES
 from apps.clients.models import Client
 from apps.contractors.models import Contractor
+from apps.contractor_managers.models import ContractorManager
 
 
 class Debt(models.Model):
@@ -14,45 +15,41 @@ class Debt(models.Model):
         verbose_name = "Справа"
         verbose_name_plural = "Справи"
 
-    # todo misha: як організувати створення "Номер договору в системі" як айді чи генерувати якимось чином
-    # contract_sys_number = models.IntegerField(primary_key=True, verbose_name="Номер договору в системі")
-    contract_origin_number = models.CharField(max_length=20, blank=False, null=False,
-                                              verbose_name="Оригінальний номер договору")
+    origin_number = models.CharField(max_length=15, blank=False, null=False, unique=False, verbose_name="Оригінальний номер договору")
+    number_from_contractor = models.CharField(max_length=15, blank=False, null=False, unique=False,
+                                              verbose_name="Номер договору в системі контрагента")
     client = models.ForeignKey(Client, on_delete=models.RESTRICT, verbose_name="Клієнт")
-    currency = models.CharField(max_length=4, choices=CURRENCIES, verbose_name="Валюта")
-    # todo misha: Уточнити комісія - це сума чи відсотки
-    commission = models.IntegerField(null=False, blank=False, verbose_name="Комісія")
     date_of_creation = models.DateField(null=False, blank=False, verbose_name="Дата заключення договору")
     end_date = models.DateField(null=False, blank=False, verbose_name="Дата закінчення договору")
-    initial_amount = models.IntegerField(null=False, blank=False, verbose_name="Початкова сума")
-    total_amount = models.IntegerField(null=False, blank=False, verbose_name="Загальна сума виданих коштів")
-    current_debt = models.IntegerField(null=False, blank=False, verbose_name="Поточний борг")
-    amount_of_payments = models.IntegerField(null=False, blank=False, verbose_name="Загальна сума виплат")
-    last_payment_date = models.DateTimeField(null=True, blank=True, verbose_name="Дата останнього платежу")
-    last_payment_amount = models.IntegerField(verbose_name="Сума останнього платежу")
-    total_prolongation_amount = models.IntegerField(null=True, blank=True, verbose_name="Загальна сума пролонгацій")
-    # todo: Тіло позики і початкова сума це одне й теж?
-    loan_body = models.IntegerField(null=True, blank=True, verbose_name="Тіло позики")
-    loan_profit = models.IntegerField(null=True, blank=True, verbose_name="Проценти по позиці")
-    penalty = models.IntegerField(null=True, blank=True, verbose_name="Пеня")
-    fines = models.IntegerField(null=True, blank=True, verbose_name="Штрафи")
-    delay_date = models.DateField(verbose_name="Дата виникнення просрочки")
-    # todo misha: Уточнити чи кількість днів потрібно зберігати в базі
-    days_overdue = models.IntegerField(verbose_name="Кількість днів просрочки")
-    # todo misha: Створити модель кредитної компанії
+    # fixme: Створити модель кредитної компанії "meny to many з брендом"
     credit_company = models.CharField(max_length=50, null=True, blank=True, verbose_name="Кредитна компанія")
-    # todo misha: Створити модель кредитного бренду
+    # fixme: Створити модель кредитного бренду
     credit_brand = models.CharField(max_length=50, null=True, blank=True, verbose_name="Кредитний бренд")
     title_contractor = models.ForeignKey(Contractor, on_delete=models.RESTRICT, verbose_name="Назва контрагента")
-    # contractor_manager = models.ForeignKey(
-    #     ContractorManager,
-    #     on_delete=models.RESTRICT,
-    #     verbose_name="Менеджер контрагента"
-    # )
+    # fixme: contractor_manager має вибиратися зі списку менеджерів саме одного контрагента
+    # contractor_manager = (verbose_name="Менеджер контрагента")
+    payment_amounts = models.IntegerField(null=False, blank=False, verbose_name="Кількість платежів")
+    number_of_late_payments = models.IntegerField(null=False, blank=False, verbose_name="Кількість прострочених платежів")
+    monthly_payment_amount = models.FloatField(null=False, blank=False, verbose_name="Сума щомісячного платежу")
+    initial_amount = models.FloatField(null=False, blank=False, verbose_name="Початкова сума")
+    total_issued_amount = models.FloatField(null=False, blank=False, verbose_name="Загальна сума виданих коштів")
+    amount_of_payments = models.IntegerField(null=False, blank=False, verbose_name="Загальна сума виплат")
+    principal = models.FloatField(null=True, blank=True, verbose_name="Основний борг")
+    commission = models.FloatField(null=False, blank=False, verbose_name="Комісії")
+    interest = models.FloatField(null=True, blank=True, verbose_name="Відсотки")
+    penalty = models.FloatField(null=True, blank=True, verbose_name="Пеня")
+    fines = models.FloatField(null=True, blank=True, verbose_name="Штрафи")
+    current_debt = models.FloatField(null=False, blank=False, verbose_name="Поточний борг")
+    total_prolongation_amount = models.FloatField(null=True, blank=True, verbose_name="Загальна сума пролонгацій")
+    last_payment_date = models.DateTimeField(null=True, blank=True, verbose_name="Дата останнього платежу")
+    last_payment_amount = models.FloatField(verbose_name="Сума останнього платежу")
+    currency = models.CharField(max_length=4, choices=CURRENCIES, verbose_name="Валюта")
+    delay_date = models.DateField(verbose_name="Дата виникнення просрочки")
+    delay_days = models.IntegerField(verbose_name="Кількість днів просрочки")
 
     def update(self):
         self.update_date = timezone.now()
         self.save()
 
     def __str__(self):
-        return f"{self.id}, {self.contract_origin_number}, {self.current_debt}грн, {self.client}"
+        return f"{self.id}, {self.origin_number}, {self.current_debt}грн, {self.client}"

@@ -4,6 +4,6 @@ from .models import Debt
 
 @admin.register(Debt)
 class DebtAdmin(admin.ModelAdmin):
-    list_display = ("id", "contract_origin_number", "client", "currency", "current_debt")
-    list_filter = ("contract_origin_number", "client", "currency", "current_debt")
-    search_fields = ("contract_origin_number", "current_debt")
+    list_display = ("id", "origin_number", "client", "currency", "current_debt")
+    list_filter = ("origin_number", "client", "currency", "current_debt")
+    search_fields = ("origin_number", "current_debt")

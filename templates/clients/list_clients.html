@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+    {% block title %}
+        Список клієнтів
+    {% endblock %}
+    {% block page_title %}Список клієнтів{% endblock %}
+    {% block content %}
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr class="active">
+                    <th scope="col">ID</th>
+                    <th scope="col">ФІО</th>
+                    <th scope="col">Дата народження</th>
+                    <th scope="col">№ телефону</th>
+                    <th scope="col">Електронна пошта</th>
+                    <th scope="col">ІПН</th>
+                    <th scope="col">Серія, № паспорту</th>
+                    <th scope="col">Адреса</th>
+                    <th scope="col">Роботодавець</th>
+                    <th scope="col">Справи</th>
+                    <th scope="col">Дата реєстрації</th>
+                    <th scope="col">Дата оновлення</th>
+                    <th scope="col">Коментар</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                <tr>
+                    <td>{{ client.id|safe  }}</td>
+                    <td>{{ client.last_name|safe }} {{ client.first_name|safe }} {{ client.patronymic|safe }}</td>
+                    <td>{{ client.date_of_birth|safe }}</td>
+                    <td>{{ client.primary_phone_number|safe }}</td>
+                    <td>{{ client.email|safe }}</td>
+                    <td>{{ client.ipn|safe }}</td>
+                    <td>{{ client.passport_serial|safe }}{{ client.passport_number|safe }}</td>
+                    <td>{{ client.addresses|safe }}</td>
+                    <td>{{ client.employer|safe }}</td>
+                    <td>
+                        <ul>
+                            {% for key, value in client_debts.items %}
+                                <li>
+                                    {{ key.value|safe }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>{{ client.created_date|safe }}</td>
+                    <td>{{ client.update_date|safe }}</td>
+                    <td>{{ client.comment|safe }}</td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
+    {% block footer %}
+    {% endblock %}
