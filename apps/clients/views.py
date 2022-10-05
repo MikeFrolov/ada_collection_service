@@ -1,21 +1,13 @@
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.views.generic import ListView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from .models import Client
-from apps.debts.models import Debt
 
 
 # todo: Написати функцію що повертає список справ фільтрованих по клієнту, передати цей список в шаблон "List_clients"
-def list_client_debts(clients_list):
-    clients_debts = {}
-    for client in clients_list:
-        clients_debts[client.id] = [debt for debt in Debt.objects.filter(client.id)]
-    return clients_debts
-
 
 class ListClientsView(ListView):
     template_name = 'clients/list_clients.html'
