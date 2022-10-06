@@ -8,15 +8,31 @@ from apps.contractor_managers.models import ContractorManager
 class Debt(models.Model):
     """Справа(Договір)"""
     class CurrencyChoices(models.TextChoices):
-        USD = 'usd', 'US Dollar',
-        EUR = 'eur', 'Euro',
-        UAH = 'uah', 'Гривня',
+        USD = 'USD', 'US Dollar',
+        EUR = 'EUR', 'Euro',
+        UAH = 'UAH', 'Гривня',
 
-    origin_number = models.CharField(max_length=15, blank=False, null=False, unique=False, verbose_name="Оригінальний номер договору")
-    number_from_contractor = models.CharField(max_length=15, blank=False, null=False, unique=False,
-                                              verbose_name="Номер договору в системі контрагента")
+    origin_number = models.CharField(
+        max_length=15,
+        blank=False,
+        null=False,
+        unique=False,
+        verbose_name="Оригінальний номер договору"
+    )
+    number_from_contractor = models.CharField(
+        max_length=15,
+        blank=False,
+        null=False,
+        unique=False,
+        verbose_name="Номер договору в системі контрагента"
+    )
     client = models.ForeignKey(Client, on_delete=models.RESTRICT, verbose_name="Клієнт")
-    date_of_creation = models.DateField(null=False, blank=False, verbose_name="Дата заключення договору", help_text='01.01.2000')
+    date_of_creation = models.DateField(
+        null=False,
+        blank=False,
+        verbose_name="Дата заключення договору",
+        help_text='format: 01.01.2000'
+    )
     end_date = models.DateField(null=False, blank=False, verbose_name="Дата закінчення договору")
     # fixme: Створити модель кредитної компанії "meny to many з брендом"
     credit_company = models.CharField(max_length=50, null=True, blank=True, verbose_name="Кредитна компанія")

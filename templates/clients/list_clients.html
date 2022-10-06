@@ -36,9 +36,9 @@
                     <td>{{ client.employer|safe }}</td>
                     <td>
                         <ul>
-                            {% for key, value in client_debts.items %}
+                            {% for k, v in client_debts %}
                                 <li>
-                                    {{ key.value|safe }}
+                                    {{ v.id|safe }}
                                 </li>
                             {% endfor %}
                         </ul>

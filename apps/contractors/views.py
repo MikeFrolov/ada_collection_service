@@ -1,6 +1,9 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 from .models import Contractor
 
 
@@ -22,3 +25,18 @@ class ListContractorsView(ListView):
         else:
             contractors = [obj for obj in Contractor.objects.filter(**filter_parameters).order_by('id')]
         return render(request, self.template_name, {'contractors': contractors})  # List contractors from database
+
+
+class CreateContractorFormView(LoginRequiredMixin, CreateView):
+    template_name = 'contractors/create_contractor_form.html'
+    model = Contractor
+    fields = [
+            'type',
+            'edrpou',
+            'title',
+            'email',
+            'phone',
+            'address',
+            'post_address'
+    ]
+    success_url = reverse_lazy('list_contractors')
