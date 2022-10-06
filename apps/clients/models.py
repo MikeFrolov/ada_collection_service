@@ -8,11 +8,6 @@ from apps.core.models import Person
 class Client(Person):
     """Клієнт(Боржник)"""
 
-    class Meta:
-        db_table = "clients"
-        verbose_name = "Клієнт"
-        verbose_name_plural = "Клієнти"
-
     ipn = models.BigIntegerField(null=True, blank=True, unique=True, verbose_name="ІПН")
     passport_serial = models.CharField(
         max_length=2,
@@ -31,6 +26,12 @@ class Client(Person):
     # def update(self):
     #     self.update_date = timezone.now()
     #     self.save()
+
+    class Meta:
+        db_table = "clients"
+        verbose_name = "Клієнт"
+        verbose_name_plural = "Клієнти"
+        unique_together = (('passport_serial', 'passport_number'),)
 
     def __str__(self):
         return f"{self.last_name} {self.first_name} {self.patronymic}"
