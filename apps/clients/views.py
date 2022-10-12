@@ -8,11 +8,6 @@ from .models import Client
 from apps.debts.models import Debt
 
 
-# todo: Написати функцію що повертає список справ фільтрованих по клієнту, передати цей список в шаблон "List_clients"
-def get_client_debts(client):
-    debts = Client.objects.select_related('client.id')
-
-
 class ListClientsView(ListView):
     template_name = 'clients/list_clients.html'
 
@@ -21,14 +16,6 @@ class ListClientsView(ListView):
 
         if not filter_parameters:  # If no filtering parameters are entered
             clients = Client.objects.all().order_by('id')
-            # client_debts = {debt}
-        # TODO: Add pagination
-        # FIXME: Crashes if using pagination, Conflicting requests '?page=1' and '?age = 1'
-            # paginator = Paginator(students, 10)
-            # page_number = request.GET.get('page')
-            # page_obj = paginator.get_page(page_number)
-        # FIXME: Crashes if trying to enter a filter that does not exist
-        # TODO: Add filter name check
         else:
             clients = [obj for obj in Client.objects.filter(**filter_parameters).order_by('id')]
         return render(request, self.template_name, {'clients': clients})  # List clients from database
