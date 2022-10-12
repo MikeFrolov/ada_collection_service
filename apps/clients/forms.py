@@ -25,10 +25,3 @@ class ClientFormFormModel(forms.ModelForm):
             'update_date',
             'comment'
         ]
-
-
-class ClientForm(forms.ModelForm):
-
-    class Meta:
-        model = Post
-        fields = ('title', 'text',)

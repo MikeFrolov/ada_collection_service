@@ -1,6 +1,9 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 from .models import Debt
 
 
@@ -22,3 +25,37 @@ class ListDebtsView(ListView):
         else:
             debts = [obj for obj in Debt.objects.filter(**filter_parameters).order_by('id')]
         return render(request, self.template_name, {'debts': debts})  # List debts from database
+
+
+class CreateDebtFormView(LoginRequiredMixin, CreateView):
+    template_name = 'debts/create_debt_form.html'
+    model = Debt
+    fields = [
+        'origin_number',
+        'number_from_contractor',
+        'client',
+        'date_of_creation',
+        'end_date',
+        'credit_company',
+        'credit_brand',
+        'title_contractor',
+        'payment_amounts',
+        'number_of_late_payments',
+        'monthly_payment_amount',
+        'initial_amount',
+        'total_issued_amount',
+        'amount_of_payments',
+        'principal',
+        'commission',
+        'interest',
+        'penalty',
+        'fines',
+        'current_debt',
+        'total_prolongation_amount',
+        'last_payment_date',
+        'last_payment_amount',
+        'currency',
+        'delay_date',
+        'delay_days',
+    ]
+    success_url = reverse_lazy('list_debts')
