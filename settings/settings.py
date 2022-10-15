@@ -40,6 +40,8 @@ ROOT_APPS = [
 ]
 
 INSTALLED_APPS = [
+    'jazzmin',  # Apdated design for admin panel "pip install -U django-jazzmin"
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
