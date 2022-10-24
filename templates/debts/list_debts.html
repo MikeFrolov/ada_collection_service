@@ -1,12 +1,12 @@
-{% extends "base.html" %}
+{% extends "base_v1.html" %}
     {% block title %}
         Список справ
     {% endblock %}
-    {% block page_title %}Список справ{% endblock %}
+    {% block page_title %}<br>Список справ{% endblock %}
     {% block content %}
         <div class="container">
-            <table class="table table-bordered table-striped" id="example" style="text-align: center;">
-                <thead class="table-dark">
+            <table class="table table-bordered table-striped table-sm" id="example" style="text-align: center;">
+                <thead class="table-dark opacity-75">
                     <tr class="active">
                         <th scope="col">#</th>
                         <th scope="col">Оригінальний №</th>
@@ -26,7 +26,7 @@
                     {% for debt in debts %}
                     <tr>
                         <td>{{ debt.id|safe  }}</td>
-                        <td>{{ debt.origin_number|safe }}</td>
+                        <td><a href="{% url 'debt_detail' debt.pk %}">{{ debt.origin_number|safe }}</a></td>
                         <td>{{ debt.client|safe }}</td>
                         <td>{{ debt.currency|safe }}</td>
                         <td>{{ debt.date_of_creation|safe }}</td>

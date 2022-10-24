@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href={% static "img/favicon.ico" %} rel="shortcut icon">
+
+  <!-- Logo -->
+  <link href={% static "img/logo.ico" %} rel="shortcut icon">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+        crossorigin="anonymous">
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Datatables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href={% static "assets/vendor/aos/aos.css" %} rel="stylesheet">
+  <link href={% static "assets/vendor/bootstrap/css/bootstrap.min.css" %} rel="stylesheet">
+  <link href={% static "assets/vendor/bootstrap-icons/bootstrap-icons.css" %} rel="stylesheet">
+  <link href={% static "assets/vendor/boxicons/css/boxicons.min.css" %} rel="stylesheet">
+  <link href={% static "assets/vendor/glightbox/css/glightbox.min.css" %} rel="stylesheet">
+  <link href={% static "assets/vendor/swiper/swiper-bundle.min.css" %} rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href={% static "assets/css/style.css" %} rel="stylesheet">
+  <!-- Static CSS -->
+  <link href={% static "css/base_style.css" %} rel="stylesheet">
+    <!-- Page CSS  -->
+    {% block css %}
+
+    {% endblock %}
+
+  <!-- =======================================================
+  * Template Name: Kelly - v4.9.1
+  * Template URL: https://bootstrapmade.com/kelly-free-bootstrap-cv-resume-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <!--Title-->
+  <title>{% block title %}{% endblock %}</title>
+</head>
+  <body>
+    <div class="wrapper">
+    <!-- ==== Header block==== -->
+    <header id="header" class="fixed-top">
+      <div class=" container container-fluid d-flex justify-content-between align-items-center">
+
+        <h1 class="logo me-auto me-lg-0"><a href="/">ADA Collection</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+          <ul>
+            <li><a href="/admin">Адмін панель</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Справи</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                  <li><a class="dropdown-item" href="/list_debts/">Список справ</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/create_debt_form">Cтворення справи</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Клієнти</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li><a class="dropdown-item" href="/list_clients/">Список клієнтів</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/create_client_form">Cтворення клієнта</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Контрагенти</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                  <li><a class="dropdown-item" href="/list_contractors/">Список контрагентів</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/create_contractor_form">Cтворення контрагента</a></li>
+                </ul>
+            </li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+        <div class="header-social-links">
+          <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+        </div>
+
+      </div>
+
+    </header>
+    <!-- END header block -->
+    <section>
+        <!-- Message block -->
+        <div class="message container text-center">
+            {% if messages %}
+                <div class="alert alert-dark" role="alert">
+                    <ul class="messages">
+                    {% for message in messages %}
+                        <ol {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                            {{ message }}
+                        </ol>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+        <!-- END message block -->
+        <!-- Title block -->
+        <div class="title text-center">
+            <h3>{% block page_title %}{% endblock %}</h3>
+        </div>
+        <!-- END title block -->
+        <!-- ==== (ROOT) Content block ==== -->
+            {% block content %}{% endblock content %}
+        <!-- END content block -->
+      </section>
+    </div><!-- END // wrapper -->
+    <!-- ======= Footer block======= -->
+    <!--<footer class="bg-light text-center text-lg-start" id="footer">
+        <div class="text-center p-3 copyright">
+          &copy; Copyright <strong><span>ADA_Collection</span></strong>. All Rights Reserved
+        </div>
+        {% block footer %}
+        {% endblock %}
+    </footer>-->
+        <!--END footer block-->
+    <!-- End  Footer block-->
+
+    <!-- Vendor JS Files -->
+    <script src={% static "assets/vendor/purecounter/purecounter_vanilla.js" %}></script>
+    <script src={% static "assets/vendor/aos/aos.js" %}></script>
+    <script src={% static "assets/vendor/bootstrap/js/bootstrap.bundle.min.js" %}></script>
+    <script src={% static "assets/vendor/glightbox/js/glightbox.min.js" %}></script>
+    <script src={% static "assets/vendor/isotope-layout/isotope.pkgd.min.js" %}></script>
+    <script src={% static "assets/vendor/swiper/swiper-bundle.min.js" %}></script>
+    <script src={% static "assets/vendor/waypoints/noframework.waypoints.js" %}></script>
+    <script src={% static "assets/vendor/php-email-form/validate.js" %}></script>
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <!-- Datatables JS -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src={% static "js/main.js" %}></script>
+    <!-- Static JS -->
+    <script src={% static "js/datatables.js" %}></script>
+  </body>
+</html>

@@ -65,7 +65,7 @@ class Debt(models.Model):
     delay_date = models.DateField(verbose_name="Дата виникнення просрочки")
     delay_days = models.IntegerField(null=True, blank=True, default=0, verbose_name="Кількість днів просрочки")
 
-    class Meta :
+    class Meta:
         db_table = "debt"
         verbose_name = "Справа"
         verbose_name_plural = "Справи"

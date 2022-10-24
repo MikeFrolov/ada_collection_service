@@ -27,7 +27,7 @@ class ListContractorsView(ListView):
         return render(request, self.template_name, {'contractors': contractors})  # List contractors from database
 
 
-class CreateContractorFormView(LoginRequiredMixin, CreateView):
+class CreateContractorFormView(CreateView):  # Fixme: add 'LoginRequiredMixin, ' in first argument
     template_name = 'contractors/create_contractor_form.html'
     model = Contractor
     fields = [

@@ -21,7 +21,7 @@ class ListClientsView(ListView):
         return render(request, self.template_name, {'clients': clients})  # List clients from database
 
 
-class CreateClientFormView(LoginRequiredMixin, CreateView):
+class CreateClientFormView(CreateView):  # Fixme: add 'LoginRequiredMixin, ' in first argument
     template_name = 'clients/create_client_form.html'
     model = Client
     fields = [
