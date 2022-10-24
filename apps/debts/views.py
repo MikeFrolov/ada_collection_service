@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.views.generic import ListView
+from django.shortcuts import get_object_or_404, render
+from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from .models import Debt
@@ -27,7 +27,7 @@ class ListDebtsView(ListView):
         return render(request, self.template_name, {'debts': debts})  # List debts from database
 
 
-class CreateDebtFormView(LoginRequiredMixin, CreateView):
+class CreateDebtFormView(CreateView):  # Fixme: add 'LoginRequiredMixin, ' in first argument
     template_name = 'debts/create_debt_form.html'
     model = Debt
     fields = [
@@ -59,3 +59,16 @@ class CreateDebtFormView(LoginRequiredMixin, CreateView):
         'delay_days',
     ]
     success_url = reverse_lazy('list_debts')
+
+
+class DebtDetailView(DetailView):
+    model = Debt
+    template_name = 'debts/debt_detail.html'
+
+    def debt_detail_view(self, request, id):
+        try:
+            debt = Debt.objects.get(pk=id)
+        except Debt.DoesNotExist:
+            raise Http404('Debt does not exist')
+
+        return render(request, template_name, context={'debt': debt})

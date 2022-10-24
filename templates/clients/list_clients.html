@@ -1,53 +1,54 @@
-{% extends "base.html" %}
+{% extends "base_v1.html" %}
     {% block title %}
         Список клієнтів
     {% endblock %}
-    {% block page_title %}Список клієнтів{% endblock %}
+    {% block page_title %}<br>Список клієнтів{% endblock %}
     {% block content %}
-        <table class="table table-bordered table-striped" id="example" style="text-align: center;">
-            <thead class="table-dark">
-                <tr class="active">
-                    <th scope="col">ID</th>
-                    <th scope="col">ФІО</th>
-                    <th scope="col">ІПН</th>
-                    <th scope="col">Дата народження</th>
-                    <th scope="col">№ телефону</th>
-                    <th scope="col">Серія, № паспорту</th>
-                    <th scope="col">Роботодавець</th>
-                    <th scope="col">Справи</th>
-                    <th scope="col">Дата реєстрації</th>
-                    <th scope="col">Дата оновлення</th>
-                    <th scope="col">Коментар</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for client in clients %}
-                <tr>
-                    <td>{{ client.id|safe  }}</td>
-                    <td>{{ client.last_name|safe }} {{ client.first_name|safe }} {{ client.patronymic|safe }}</td>
-                    <td>{{ client.ipn|safe }}</td>
-                    <td>{{ client.date_of_birth|safe }}</td>
-                    <td>{{ client.primary_phone_number|safe }}</td>
-                    <td>{{ client.passport_serial|safe }}{{ client.passport_number|safe }}</td>
-                    <td>{{ client.employer|safe }}</td>
-                    <td>
-                        <ul>
-                            <!--client.debt_set.all працює для витягу усих звязаних з client istance екземплярів моделей-->
-                            {% for debt in client.debt_set.all %}
-                                <li>
-                                    {{ debt.origin_number|safe }}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td>{{ client.created_date|safe }}</td>
-                    <td>{{ client.update_date|safe }}</td>
-                    <td>{{ client.comment|safe }}</td>
-
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <div class="container">
+            <table class="table table-bordered table-striped table-sm" id="example" style="text-align: center;">
+                <thead class="table-dark opacity-75">
+                    <tr class="active">
+                        <th scope="col">ID</th>
+                        <th scope="col">ФІО</th>
+                        <th scope="col">ІПН</th>
+                        <th scope="col">Дата народження</th>
+                        <th scope="col">№ телефону</th>
+                        <th scope="col">Серія, № паспорту</th>
+                        <th scope="col">Роботодавець</th>
+                        <th scope="col">Справи</th>
+                        <th scope="col">Дата реєстрації</th>
+                        <th scope="col">Дата оновлення</th>
+                        <th scope="col">Коментар</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                    <tr>
+                        <td>{{ client.id|safe  }}</td>
+                        <td>{{ client.last_name|safe }} {{ client.first_name|safe }} {{ client.patronymic|safe }}</td>
+                        <td>{{ client.ipn|safe }}</td>
+                        <td>{{ client.date_of_birth|safe }}</td>
+                        <td>{{ client.primary_phone_number|safe }}</td>
+                        <td>{{ client.passport_serial|safe }}{{ client.passport_number|safe }}</td>
+                        <td>{{ client.employer|safe }}</td>
+                        <td>
+                            <ul>
+                                <!--client.debt_set.all працює для витягу усих звязаних з client istance екземплярів моделей-->
+                                {% for debt in client.debt_set.all %}
+                                    <li>
+                                        {{ debt.origin_number|safe }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>{{ client.created_date|safe }}</td>
+                        <td>{{ client.update_date|safe }}</td>
+                        <td>{{ client.comment|safe }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% endblock %}
     {% block footer %}
     {% endblock %}
