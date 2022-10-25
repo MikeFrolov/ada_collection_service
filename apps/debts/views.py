@@ -63,7 +63,7 @@ class CreateDebtFormView(CreateView):  # Fixme: add 'LoginRequiredMixin, ' in fi
 
 class DebtDetailView(DetailView):
     model = Debt
-    template_name = 'debts/debt_detail.html'
+    template_name = 'debts/debt_detail_v1.html'
 
     def debt_detail_view(self, request, id):
         try:

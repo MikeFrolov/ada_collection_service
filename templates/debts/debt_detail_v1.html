@@ -9,8 +9,13 @@
     <div class="container">
         <br>
         <div class="card">
-            <div class="card-header text-center opacity-75">
-                  <h4>Справа №: {{ debt.id|safe }}</h4>
+            <div class="card-header opacity-75">
+                <div class="row">
+                    <div class="col-lg-4"><h4>{{ debt.client|safe }}</h4></div>
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-2"><h4>#{{ debt.origin_number }}</h4></div>
+                </div>
             </div>
         </div>
     </div>
@@ -33,12 +38,12 @@
         <div class="tab-content">
             <!-- ==== TAB Client ==== -->
             <div class="tab-pane active" id="client">
-                <h4 class="text-center p-3 text-uppercase">{{ debt.client|safe }}</h4>
                 <div class="row g-2">
-                    <div class="col-7 p-2">
+                    <!-- ==== Client data ==== -->
+                    <div class="col-lg-4">
                         <table class="table p-1">
                           <thead>
-                            <tr><h5 class=" p-2 text-center bg-light">Дані клієнта</h5></tr>
+                            <tr><h5 class="p-1 text-center bg-light">Дані клієнта</h5></tr>
                           </thead>
                           <tbody>
                             <tr>
@@ -84,10 +89,11 @@
                           </tbody>
                         </table>
                     </div>
-                    <div class="col-5 p-2">
+                    <!-- ==== Statuses ==== -->
+                    <div class="col-lg-4">
                         <table class="table p-1">
                           <thead>
-                            <tr><h5 class=" p-2 text-center bg-light">Статуси</h5></tr>
+                            <tr><h5 class=" p-1 text-center bg-light">Статуси</h5></tr>
                           </thead>
                           <tbody>
                             <tr>
@@ -129,74 +135,76 @@
                           </tbody>
                         </table>
                     </div>
-                    <div class="col-7 p-2">
-                        <table class="table p-1">
-                          <thead>
-                            <tr><h5 class=" p-2 text-center bg-light">Соціальні мережі</h5></tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td colspan="2">Facebook:</td>
-                              <td>Посилання</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">LinkedIn:</td>
-                              <td>Посилання</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Instagram:</td>
-                              <td>Посилання</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Twitter:</td>
-                              <td>Посилання</td>
-                            </tr>
-                          </tbody>
-                        </table>
+                    <!-- ==== Social networks & Other debts==== -->
+                    <div class="col-lg-4">
+                        <div class="col-lg-12">
+                            <table class="table p-1">
+                              <thead>
+                                <tr><h5 class="p-1 text-center bg-light">Соціальні мережі</h5></tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td colspan="2">Facebook:</td>
+                                  <td>https://www.facebook.com/profile.php?id=100006234526734</td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2">LinkedIn:</td>
+                                  <td>Посилання</td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2">Instagram:</td>
+                                  <td>Посилання</td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2">Tik Tok:</td>
+                                  <td>Посилання</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                        </div>
+                        <div class="col-lg-12">
+                          <table class="table p-1">
+                              <thead>
+                                <tr><h5 class="p-1 text-center bg-light">Інші справи</h5></tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td colspan="2">Кількість справ в системі:</td>
+                                  <td>2</td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2">Кількість виконавчих впроваджень:</td>
+                                  <td>4</td>
+                                </tr>
+                              </tbody>
+                          </table>
+                        </div>
                     </div>
-                    <div class="col-5 p-2">
-                      <table class="table p-1">
-                          <thead>
-                            <tr><h5 class=" p-2 text-center bg-light">Інші справи</h5></tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td colspan="2">Кількість справ в системі:</td>
-                              <td>Написати ф-цію</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Кількість виконавчих впроваджень:</td>
-                              <td>Написати ф-цію</td>
-                            </tr>
-                          </tbody>
-                      </table>
-                    </div>
-                    <div class="col-12 p-2">
-                        <hr>
-                        <p><h4 class="text-center">Коментарі</h4></p>
-                        <table class="table p-1 border">
-                          <thead class="p-2 text-center bg-light">
+                    <!-- ==== Comments ==== -->
+                    <div class="col-lg-12">
+                        <table class="table border">
+                          <thead class="text-center bg-light">
                             <tr>
                                 <th><h6 class="col">Дата:</h6></th>
-                                <th><h6 class="col">Звязок через:</h6></th>
+                                <th><h6 class="col">Зв'язок через:</h6></th>
                                 <th><h6 class="col">Обіцянка:</h6></th>
                                 <th><h6 class="col text-center">Коментар:</h6></th>
                           </thead>
                           <tbody>
                             <tr class="border">
-                                <td class="col-1 border">2022-10-14</td>
+                                <td class="col-1 border">14.10.2022 14:02:43</td>
                                 <td class="col-2 border">Тел.дзвінок</td>
                                 <td class="col-2 border">Передадуть інформацію</td>
                                 <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
                             </tr>
                             <tr class="border">
-                                <td class="col-1 border">2022-09-01</td>
+                                <td class="col-1 border">01.09.2022 10:28:23</td>
                                 <td class="col-2 border">Viber</td>
                                 <td class="col-2 border">Обіцянка оплати</td>
                                 <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
                             </tr>
                             <tr class="border">
-                                <td class="col-1 border">2022-08-24</td>
+                                <td class="col-1 border">24.08.2022 17:21:33</td>
                                 <td class="col-2 border">Тел.дзвінок</td>
                                 <td class="col-2 border">Зайнятий</td>
                                 <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
@@ -204,6 +212,7 @@
                           </tbody>
                         </table>
                     </div>
+                    <!-- END Comments -->
                 </div>
             </div>
             <!-- ==== TAB Debt ==== -->

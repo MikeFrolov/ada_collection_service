@@ -29,7 +29,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Raleway", sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 #main {
@@ -205,7 +205,7 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: "Raleway", sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 15px;
   font-weight: 600;
   color: #888888;
@@ -461,7 +461,7 @@ h6 {
 }
 
 #hero .btn-about {
-  font-family: "Raleway", sans-serif;
+  font-family: "Arial", sans-serif;
   text-transform: uppercase;
   font-weight: 600;
   font-size: 12px;
@@ -567,7 +567,7 @@ section {
 }
 
 .cta .cta-btn {
-  font-family: "Raleway", sans-serif;
+  font-family: "Arial", sans-serif;
   text-transform: uppercase;
   font-weight: 500;
   font-size: 16px;
@@ -676,7 +676,7 @@ section {
 .facts .counters p {
   padding: 0;
   margin: 0 0 20px 0;
-  font-family: "Raleway", sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 14px;
 }
 
