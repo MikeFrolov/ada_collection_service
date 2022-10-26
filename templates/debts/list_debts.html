@@ -1,44 +1,58 @@
 {% extends "base_v1.html" %}
-    {% block title %}
-        Список справ
-    {% endblock %}
-    {% block page_title %}<br>Список справ{% endblock %}
-    {% block content %}
-        <div class="container">
-            <table class="table table-bordered table-striped table-sm" id="example" style="text-align: center;">
-                <thead class="table-dark opacity-75">
-                    <tr class="active">
-                        <th scope="col">#</th>
-                        <th scope="col">Оригінальний №</th>
-                        <th scope="col">ФІО клієнта</th>
-                        <th scope="col">Валюта</th>
-                        <th scope="col">Дата заключення договору</th>
-                        <th scope="col">Дата закінчення договору</th>
-                        <th scope="col">Дата останнього платежу</th>
-                        <th scope="col">Початкова сума</th>
-                        <th scope="col">Поточний борг</th>
-                        <th scope="col">Кількість днів просрочки</th>
-                        <th scope="col">Назва контрагента</th>
-                    </tr>
-                </thead>
-                <!-- Data from backend -->
-                <tbody>
-                    {% for debt in debts %}
-                    <tr>
-                        <td>{{ debt.id|safe  }}</td>
-                        <td><a href="{% url 'debt_detail' debt.pk %}">{{ debt.origin_number|safe }}</a></td>
-                        <td>{{ debt.client|safe }}</td>
-                        <td>{{ debt.currency|safe }}</td>
-                        <td>{{ debt.date_of_creation|safe }}</td>
-                        <td>{{ debt.end_date|safe }}</td>
-                        <td>{{ debt.last_payment_date|safe }}</td>
-                        <td>{{ debt.initial_amount|safe }}</td>
-                        <td>{{ debt.current_debt|safe }}</td>
-                        <td>{{ debt.delay_days|safe }}</td>
-                        <td>{{ debt.title_contractor|safe }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+{% block title %}Список справ{% endblock %}
+{% block page_title %}
+<!-- ==== Page title block ==== -->
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header opacity-75">
+            <div class="row">
+                <h5 class="text-center">Список справ</h5>
+            </div>
         </div>
-    {% endblock %}
+    </div>
+</div>
+<!-- END page title block -->
+{% endblock %}
+
+{% block content %}
+<!-- ==== Content block ==== -->
+<div class="container">
+    <table class="table table-bordered table-striped table-sm" id="example" style="text-align: center;">
+        <thead class="table-light">
+            <tr class="active">
+                <th scope="col">#</th>
+                <th scope="col">Оригінальний №</th>
+                <th scope="col">ФІО клієнта</th>
+                <th scope="col">Валюта</th>
+                <th scope="col">Дата заключення договору</th>
+                <th scope="col">Дата закінчення договору</th>
+                <th scope="col">Дата останнього платежу</th>
+                <th scope="col">Початкова сума</th>
+                <th scope="col">Поточний борг</th>
+                <th scope="col">Кількість днів просрочки</th>
+                <th scope="col">Назва контрагента</th>
+            </tr>
+        </thead>
+        <!-- Data from backend -->
+        <tbody>
+            {% for debt in debts %}
+            <tr>
+                <td>{{ debt.id|safe  }}</td>
+                <td><a href="{% url 'debt_detail' debt.pk %}">{{ debt.origin_number|safe }}</a></td>
+                <td>{{ debt.client|safe }}</td>
+                <td>{{ debt.currency|safe }}</td>
+                <td>{{ debt.date_of_creation|safe }}</td>
+                <td>{{ debt.end_date|safe }}</td>
+                <td>{{ debt.last_payment_date|safe }}</td>
+                <td>{{ debt.initial_amount|safe }}</td>
+                <td>{{ debt.current_debt|safe }}</td>
+                <td>{{ debt.delay_days|safe }}</td>
+                <td>{{ debt.title_contractor|safe }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!-- END Content block -->
+{% endblock %}

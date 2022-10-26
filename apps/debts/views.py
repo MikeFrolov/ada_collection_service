@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from .fields import create_form_fields
 from .models import Debt
 
 
@@ -30,34 +31,7 @@ class ListDebtsView(ListView):
 class CreateDebtFormView(CreateView):  # Fixme: add 'LoginRequiredMixin, ' in first argument
     template_name = 'debts/create_debt_form.html'
     model = Debt
-    fields = [
-        'origin_number',
-        'number_from_contractor',
-        'client',
-        'date_of_creation',
-        'end_date',
-        'credit_company',
-        'credit_brand',
-        'title_contractor',
-        'payment_amounts',
-        'number_of_late_payments',
-        'monthly_payment_amount',
-        'initial_amount',
-        'total_issued_amount',
-        'amount_of_payments',
-        'principal',
-        'commission',
-        'interest',
-        'penalty',
-        'fines',
-        'current_debt',
-        'total_prolongation_amount',
-        'last_payment_date',
-        'last_payment_amount',
-        'currency',
-        'delay_date',
-        'delay_days',
-    ]
+    fields = create_form_fields
     success_url = reverse_lazy('list_debts')
 
 

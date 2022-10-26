@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from .fields import create_form_fields
 from .models import Client
 from apps.debts.models import Debt
 
@@ -24,23 +25,5 @@ class ListClientsView(ListView):
 class CreateClientFormView(CreateView):  # Fixme: add 'LoginRequiredMixin, ' in first argument
     template_name = 'clients/create_client_form.html'
     model = Client
-    fields = [
-        'last_name',
-        'first_name',
-        'patronymic',
-        'date_of_birth',
-        'primary_phone_number',
-        'additional_phone_number',
-        'work_phone_number',
-        'home_phone_number',
-        'email',
-        'ipn',
-        'passport_serial',
-        'passport_number',
-        'addresses',
-        'employer',
-        'created_date',
-        'update_date',
-        'comment'
-    ]
+    fields = create_form_fields
     success_url = reverse_lazy('list_clients')

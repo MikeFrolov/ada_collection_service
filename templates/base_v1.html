@@ -56,81 +56,78 @@
 </head>
   <body style="font-family: sans-serif; font-size: 13px;">
     <div class="wrapper">
-    <!-- ==== Header block==== -->
-    <header id="header" class="fixed-top">
-      <div class=" container container-fluid d-flex justify-content-between align-items-center">
-
-        <h1 class="logo me-auto me-lg-0"><a href="/">ADA Collection</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-        <nav id="navbar" class="navbar order-last order-lg-0">
-          <ul>
-            <li><a href="/admin">Адмін панель</a></li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Справи</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                  <li><a class="dropdown-item" href="/list_debts/">Список справ</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="/create_debt_form">Cтворення справи</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Клієнти</a>
-              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item" href="/list_clients/">Список клієнтів</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="/create_client_form">Cтворення клієнта</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Контрагенти</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                  <li><a class="dropdown-item" href="/list_contractors/">Список контрагентів</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="/create_contractor_form">Cтворення контрагента</a></li>
-                </ul>
-            </li>
-          </ul>
-          <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
-        <div class="header-social-links">
-          <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-        </div>
-
-      </div>
-
-    </header>
-    <!-- END header block -->
-    <section>
-        <!-- Message block -->
-        <div class="message container text-center">
-            {% if messages %}
-                <div class="alert alert-dark" role="alert">
-                    <ul class="messages">
-                    {% for message in messages %}
-                        <ol {% if message.tags %} class="{{ message.tags }}" {% endif %}>
-                            {{ message }}
-                        </ol>
-                    {% endfor %}
+        <!-- ==== Header block==== -->
+        <header id="header" class="fixed-top">
+          <div class=" container container-fluid d-flex justify-content-between align-items-center">
+            <h1 class="logo me-auto me-lg-0"><a href="/">ADA Collection</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            <nav id="navbar" class="navbar order-last order-lg-0">
+              <ul>
+                <li><a href="/admin">Адмін панель</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Справи</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                      <li><a class="dropdown-item" href="/list_debts/">Список справ</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="/create_debt_form">Cтворення справи</a></li>
                     </ul>
-                </div>
-            {% endif %}
-        </div>
-        <!-- END message block -->
-        <!-- Title block -->
-        <div class="title text-center">
-            <h3>{% block page_title %}{% endblock %}</h3>
-        </div>
-        <!-- END title block -->
-        <!-- ==== (ROOT) Content block ==== -->
-        {% block content %}{% endblock content %}
-        <!-- END content block -->
-      </section>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Клієнти</a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                    <li><a class="dropdown-item" href="/list_clients/">Список клієнтів</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/create_client_form">Cтворення клієнта</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Контрагенти</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                      <li><a class="dropdown-item" href="/list_contractors/">Список контрагентів</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="/create_contractor_form">Cтворення контрагента</a></li>
+                    </ul>
+                </li>
+              </ul>
+              <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links">
+              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+          </div>
+        </header>
+        <!-- END header block -->
+        <section>
+            <!-- Message block -->
+            <div class="message container text-center">
+                {% if messages %}
+                    <div class="alert alert-dark" role="alert">
+                        <ul class="messages">
+                        {% for message in messages %}
+                            <ol {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                                {{ message }}
+                            </ol>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+            <!-- END message block -->
+            <!-- Title block -->
+            <div class="title text-center">
+                <h3>{% block page_title %}{% endblock %}</h3>
+            </div>
+            <!-- END title block -->
+            <!-- ==== Content block ==== -->
+            {% block content %}
+
+            {% endblock content %}
+            <!-- END content block -->
+          </section>
     </div><!-- END // wrapper -->
     <!-- ======= Footer block======= -->
     <!--<footer class="bg-light text-center text-lg-start" id="footer">

@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from .fields import create_form_fields
 from .models import Contractor
 
 
@@ -30,13 +31,5 @@ class ListContractorsView(ListView):
 class CreateContractorFormView(CreateView):  # Fixme: add 'LoginRequiredMixin, ' in first argument
     template_name = 'contractors/create_contractor_form.html'
     model = Contractor
-    fields = [
-            'type',
-            'edrpou',
-            'title',
-            'email',
-            'phone',
-            'address',
-            'post_address'
-    ]
+    fields = create_form_fields
     success_url = reverse_lazy('list_contractors')

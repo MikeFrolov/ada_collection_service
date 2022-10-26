@@ -1,224 +1,228 @@
 {% extends "base_v1.html" %}
-    {% block title %}
-        Справа № {{ debt.id }}
-    {% endblock %}
-    {% block css %}
-        <!--<link href="../static/debts/css/debts_detail_style.css" rel="stylesheet">-->
-    {% endblock %}
-    {% block page_title %}
-    <div class="container">
-        <br>
-        <div class="card">
-            <div class="card-header opacity-75">
-                <div class="row">
-                    <div class="col-lg-4"><h4>{{ debt.client|safe }}</h4></div>
-                    <div class="col-lg-3"></div>
-                    <div class="col-lg-3"></div>
-                    <div class="col-lg-2"><h4>#{{ debt.origin_number }}</h4></div>
-                </div>
+{% block title %}
+    Справа № {{ debt.id }}
+{% endblock %}
+{% block css %}
+    <!--<link href="../static/debts/css/debts_detail_style.css" rel="stylesheet">-->
+{% endblock %}
+{% block page_title %}
+<!-- ==== Page title block ==== -->
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header opacity-75">
+            <div class="row">
+                <div class="col-lg-4"><h5>{{ debt.client|safe }}</h5></div>
+                <div class="col-lg-3"></div>
+                <div class="col-lg-3"></div>
+                <div class="col-lg-2"><h5>#{{ debt.origin_number }}</h5></div>
             </div>
         </div>
     </div>
-    {% endblock %}
-    {% block content %}
-    <div class="container">
-        <!-- ==== NAVBAR block with inner tabs ==== -->
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-            <a class="nav-link active" data-bs-toggle="tab" href="#client">Клієнт</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#debt">Договір</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#communication">Коммунікація</a>
-            </li>
-        </ul>
-        <!-- ==== TAB panes  with content ==== -->
-        <div class="tab-content">
-            <!-- ==== TAB Client ==== -->
-            <div class="tab-pane active" id="client">
-                <div class="row g-2">
-                    <!-- ==== Client data ==== -->
-                    <div class="col-lg-4">
-                        <table class="table p-1">
-                          <thead>
-                            <tr><h5 class="p-1 text-center bg-light">Дані клієнта</h5></tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td colspan="2">ІПН:</td>
-                              <td>{{ debt.client.ipn|safe }}</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Паспорт:</td>
-                              <td>{{ debt.client.passport_serial }} {{ debt.client.passport_number }}</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Дата народження:</td>
-                              <td>{{ debt.client.date_of_birth|safe }}</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Вік:</td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Стать:</td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Роботодавець:</td>
-                              <td>{{ debt.client.employer|safe }}</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Посада:</td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Юр. адреса:</td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Фіз. адреса:</td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Роб. адреса:</td>
-                              <td></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                    </div>
-                    <!-- ==== Statuses ==== -->
-                    <div class="col-lg-4">
-                        <table class="table p-1">
-                          <thead>
-                            <tr><h5 class=" p-1 text-center bg-light">Статуси</h5></tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td colspan="2">Військовий:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Тимчасово переміщений:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Віїхав за кордон:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Під окупацією:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Закредитований:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Банкрот:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Тюрма:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Хвороба:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Смерть:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                    </div>
-                    <!-- ==== Social networks & Other debts==== -->
-                    <div class="col-lg-4">
-                        <div class="col-lg-12">
-                            <table class="table p-1">
-                              <thead>
-                                <tr><h5 class="p-1 text-center bg-light">Соціальні мережі</h5></tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td colspan="2">Facebook:</td>
-                                  <td>https://www.facebook.com/profile.php?id=100006234526734</td>
-                                </tr>
-                                <tr>
-                                  <td colspan="2">LinkedIn:</td>
-                                  <td>Посилання</td>
-                                </tr>
-                                <tr>
-                                  <td colspan="2">Instagram:</td>
-                                  <td>Посилання</td>
-                                </tr>
-                                <tr>
-                                  <td colspan="2">Tik Tok:</td>
-                                  <td>Посилання</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                        </div>
-                        <div class="col-lg-12">
-                          <table class="table p-1">
-                              <thead>
-                                <tr><h5 class="p-1 text-center bg-light">Інші справи</h5></tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td colspan="2">Кількість справ в системі:</td>
-                                  <td>2</td>
-                                </tr>
-                                <tr>
-                                  <td colspan="2">Кількість виконавчих впроваджень:</td>
-                                  <td>4</td>
-                                </tr>
-                              </tbody>
-                          </table>
-                        </div>
-                    </div>
-                    <!-- ==== Comments ==== -->
+</div>
+<!-- END page title block -->
+{% endblock %}
+{% block content %}
+<!-- ==== Content block ==== -->
+<div class="container">
+    <!-- ==== NAVBAR block with inner tabs ==== -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#client">Клієнт</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#debt">Договір</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#communication">Коммунікація</a>
+        </li>
+    </ul>
+    <!-- ==== TAB panes  with content ==== -->
+    <div class="tab-content">
+        <!-- ==== TAB Client ==== -->
+        <div class="tab-pane active" id="client">
+            <div class="row g-2">
+                <!-- ==== Client data ==== -->
+                <div class="col-lg-4">
+                    <table class="table p-1">
+                      <thead>
+                        <tr><h5 class="p-1 text-center bg-light">Дані клієнта</h5></tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td colspan="2">ІПН:</td>
+                          <td class="text-center">{{ debt.client.ipn|safe }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Паспорт:</td>
+                          <td class="text-center">{{ debt.client.passport_serial }} {{ debt.client.passport_number }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Дата народження:</td>
+                          <td class="text-center">{{ debt.client.date_of_birth|safe }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Вік:</td>
+                          <td class="text-center"></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Стать:</td>
+                          <td class="text-center"></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Роботодавець:</td>
+                          <td class="text-center">{{ debt.client.employer|safe }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Посада:</td>
+                          <td class="text-center"></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Юр. адреса:</td>
+                          <td class="text-center"></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Фіз. адреса:</td>
+                          <td class="text-center"></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Роб. адреса:</td>
+                          <td class="text-center"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <!-- ==== Statuses ==== -->
+                <div class="col-lg-4">
+                    <table class="table p-1">
+                      <thead>
+                        <tr><h5 class=" p-1 text-center bg-light">Статуси</h5></tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td colspan="2">Військовий:</td>
+                          <td>Так/Ні</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Тимчасово переміщений:</td>
+                          <td>Так/Ні</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Віїхав за кордон:</td>
+                          <td>Так/Ні</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Під окупацією:</td>
+                          <td>Так/Ні</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Закредитований:</td>
+                          <td>Так/Ні</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Банкрот:</td>
+                          <td>Так/Ні</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Тюрма:</td>
+                          <td>Так/Ні</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Хвороба:</td>
+                          <td>Так/Ні</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Смерть:</td>
+                          <td>Так/Ні</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <!-- ==== Social networks & Other debts==== -->
+                <div class="col-lg-4">
                     <div class="col-lg-12">
-                        <table class="table border">
-                          <thead class="text-center bg-light">
-                            <tr>
-                                <th><h6 class="col">Дата:</h6></th>
-                                <th><h6 class="col">Зв'язок через:</h6></th>
-                                <th><h6 class="col">Обіцянка:</h6></th>
-                                <th><h6 class="col text-center">Коментар:</h6></th>
+                        <table class="table p-1">
+                          <thead>
+                            <tr><h5 class="p-1 text-center bg-light">Соціальні мережі</h5></tr>
                           </thead>
                           <tbody>
-                            <tr class="border">
-                                <td class="col-1 border">14.10.2022 14:02:43</td>
-                                <td class="col-2 border">Тел.дзвінок</td>
-                                <td class="col-2 border">Передадуть інформацію</td>
-                                <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
+                            <tr>
+                              <td colspan="2">Facebook:</td>
+                              <td>https://www.facebook.com/profile.php?id=100006234526734</td>
                             </tr>
-                            <tr class="border">
-                                <td class="col-1 border">01.09.2022 10:28:23</td>
-                                <td class="col-2 border">Viber</td>
-                                <td class="col-2 border">Обіцянка оплати</td>
-                                <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
+                            <tr>
+                              <td colspan="2">LinkedIn:</td>
+                              <td>Посилання</td>
                             </tr>
-                            <tr class="border">
-                                <td class="col-1 border">24.08.2022 17:21:33</td>
-                                <td class="col-2 border">Тел.дзвінок</td>
-                                <td class="col-2 border">Зайнятий</td>
-                                <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
+                            <tr>
+                              <td colspan="2">Instagram:</td>
+                              <td>Посилання</td>
+                            </tr>
+                            <tr>
+                              <td colspan="2">Tik Tok:</td>
+                              <td>Посилання</td>
                             </tr>
                           </tbody>
                         </table>
                     </div>
-                    <!-- END Comments -->
+                    <div class="col-lg-12">
+                      <table class="table p-1">
+                          <thead>
+                            <tr><h5 class="p-1 text-center bg-light">Інші справи</h5></tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td colspan="2">Кількість справ в системі:</td>
+                              <td>2</td>
+                            </tr>
+                            <tr>
+                              <td colspan="2">Кількість виконавчих впроваджень:</td>
+                              <td>4</td>
+                            </tr>
+                          </tbody>
+                      </table>
+                    </div>
                 </div>
+                <!-- ==== Comments ==== -->
+                <div class="col-lg-12">
+                    <table class="table border">
+                      <thead class="text-center bg-light">
+                        <tr>
+                            <th><h6 class="col">Дата:</h6></th>
+                            <th><h6 class="col">Зв'язок через:</h6></th>
+                            <th><h6 class="col">Обіцянка:</h6></th>
+                            <th><h6 class="col text-center">Коментар:</h6></th>
+                      </thead>
+                      <tbody>
+                        <tr class="border">
+                            <td class="col-1 border">14.10.2022 14:02:43</td>
+                            <td class="col-2 border">Тел.дзвінок</td>
+                            <td class="col-2 border">Передадуть інформацію</td>
+                            <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
+                        </tr>
+                        <tr class="border">
+                            <td class="col-1 border">01.09.2022 10:28:23</td>
+                            <td class="col-2 border">Viber</td>
+                            <td class="col-2 border">Обіцянка оплати</td>
+                            <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
+                        </tr>
+                        <tr class="border">
+                            <td class="col-1 border">24.08.2022 17:21:33</td>
+                            <td class="col-2 border">Тел.дзвінок</td>
+                            <td class="col-2 border">Зайнятий</td>
+                            <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <!-- END Comments -->
             </div>
-            <!-- ==== TAB Debt ==== -->
-            <div class="tab-pane" id="debt"><br>Дані по договору/справі</div>
-            <!-- ==== TAB Communication ==== -->
-            <div class="tab-pane" id="communication">Коммунікація з клієнтом.</div>
         </div>
+        <!-- ==== TAB Debt ==== -->
+        <div class="tab-pane" id="debt"><br>Дані по договору/справі</div>
+        <!-- ==== TAB Communication ==== -->
+        <div class="tab-pane" id="communication">Коммунікація з клієнтом.</div>
     </div>
-    {% endblock %}
+</div>
+<!-- END content block -->
+{% endblock %}

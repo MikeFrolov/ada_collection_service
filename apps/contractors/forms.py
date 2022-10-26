@@ -1,17 +1,10 @@
 from django import forms
 
+from .fields import create_form_fields
 from .models import Contractor
 
 
 class ContractorFormFormModel(forms.ModelForm):
     class Meta:
         model = Contractor
-        fields = [
-            'type',
-            'edrpou',
-            'title',
-            'email',
-            'phone',
-            'address',
-            'post_address'
-        ]
+        fields = create_form_fields

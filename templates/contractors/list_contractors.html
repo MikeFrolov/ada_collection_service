@@ -1,39 +1,48 @@
 {% extends "base_v1.html" %}
-    {% block title %}
-        Список контрагентів
-    {% endblock %}
-    {% block page_title %}<br>Список контрагентів{% endblock %}
-    {% block content %}
-        <div class="container">
-            <table class="table table-bordered table-striped table-sm" id="example" style="text-align: center;">
-                <thead class="table-dark opacity-75">
-                    <tr class="active">
-                        <th scope="col">ID</th>
-                        <th scope="col">Тип</th>
-                        <th scope="col">ЄДРПОУ</th>
-                        <th scope="col">Назва компанії</th>
-                        <th scope="col">Електронна пошта</th>
-                        <th scope="col">Номер телефону</th>
-                        <th scope="col">Адреса</th>
-                        <th scope="col">Поштова адреса</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for contractor in contractors %}
-                    <tr>
-                        <td>{{ contractor.id|safe  }}</td>
-                        <td>{{ contractor.type|safe }}</td>
-                        <td>{{ contractor.edrpou|safe }}</td>
-                        <td>{{ contractor.title|safe }}</td>
-                        <td>{{ contractor.email|safe }}</td>
-                        <td>{{ contractor.phone|safe }}</td>
-                        <td>{{ contractor.address|safe }}</td>
-                        <td>{{ contractor.post_address|safe }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+{% block title %}Список контрагентів{% endblock %}
+{% block page_title %}
+<!-- ==== Page title block ==== -->
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header opacity-75">
+            <div class="row">
+                <h5 class="text-center">Список контрагентів</h5>
+            </div>
         </div>
-    {% endblock %}
-    {% block footer %}
-    {% endblock %}
+    </div>
+</div>
+<!-- END page title block -->
+{% endblock %}
+{% block content %}
+<div class="container">
+    <table class="table table-bordered table-striped table-sm" id="example" style="text-align: center;">
+        <thead class="table-light">
+            <tr class="active">
+                <th scope="col">ID</th>
+                <th scope="col">Тип</th>
+                <th scope="col">ЄДРПОУ</th>
+                <th scope="col">Назва компанії</th>
+                <th scope="col">Електронна пошта</th>
+                <th scope="col">Номер телефону</th>
+                <th scope="col">Адреса</th>
+                <th scope="col">Поштова адреса</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contractor in contractors %}
+            <tr>
+                <td>{{ contractor.id|safe  }}</td>
+                <td>{{ contractor.type|safe }}</td>
+                <td>{{ contractor.edrpou|safe }}</td>
+                <td>{{ contractor.title|safe }}</td>
+                <td>{{ contractor.email|safe }}</td>
+                <td>{{ contractor.phone|safe }}</td>
+                <td>{{ contractor.address|safe }}</td>
+                <td>{{ contractor.post_address|safe }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
