@@ -39,3 +39,31 @@ class Client(Person):
     def save(self, *args, **kwargs):
         self.last_updated_dt = datetime.now()
         super().save(*args, **kwargs)
+
+
+class ClientStatuses(models.Model):
+    """Статуси клієнта"""
+    client = models.OneToOneField(
+        Client,
+        unique=True,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        verbose_name="Клієнт"
+    )
+    military = models.BooleanField(default=False, verbose_name='Військовий')
+    displaced = models.BooleanField(default=False, verbose_name='Тимчасово переміщений')
+    abroad = models.BooleanField(default=False, verbose_name='Віїхав за кордон')
+    occupation = models.BooleanField(default=False, verbose_name='Під окупацією')
+    credited = models.BooleanField(default=False, verbose_name='Закредитований')
+    bankrupt = models.BooleanField(default=False, verbose_name='Банкрот')
+    imprisoned = models.BooleanField(default=False, verbose_name='Тюрма')
+    illness = models.BooleanField(default=False, verbose_name='Хвороба')
+    death = models.BooleanField(default=False, verbose_name='Смерть')
+
+    class Meta:
+        db_table = "client_statuses"
+        verbose_name = "Статуси клієнта"
+        verbose_name_plural = "Статуси клієнтів"
+
+    def __str__(self):
+        return f"Статуси клієтна: {self.client}"
