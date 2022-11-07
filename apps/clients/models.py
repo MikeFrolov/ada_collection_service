@@ -16,16 +16,10 @@ class Client(Person):
         verbose_name="Серія паспорту"
     )
     passport_number = models.IntegerField(null=True, blank=True, verbose_name="Номер паспорту")
-    addresses = models.JSONField(null=True, blank=True, verbose_name="Адреси")
     employer = models.CharField(max_length=255, null=True, blank=True, verbose_name="Роботодавець")
+    position = models.CharField(max_length=128, null=True, blank=True, verbose_name="Посада")
     created_date = models.DateTimeField(default=timezone.now, verbose_name="Дата внесення в реєстр")
     update_date = models.DateTimeField(blank=True, null=True, verbose_name="Дата оновлення")
-    # number_of_debts = models.IntegerField(null=True, blank=True, verbose_name="Кількість справ")
-    comment = models.TextField(blank=True, verbose_name="Коментар")
-
-    # def update(self):
-    #     self.update_date = timezone.now()
-    #     self.save()
 
     class Meta:
         db_table = "clients"
@@ -47,12 +41,12 @@ class ClientStatuses(models.Model):
         Client,
         unique=True,
         on_delete=models.CASCADE,
-        primary_key=True,
-        verbose_name="Клієнт"
+        verbose_name="Клієнт",
+        primary_key=True
     )
     military = models.BooleanField(default=False, verbose_name='Військовий')
     displaced = models.BooleanField(default=False, verbose_name='Тимчасово переміщений')
-    abroad = models.BooleanField(default=False, verbose_name='Віїхав за кордон')
+    abroad = models.BooleanField(default=False, verbose_name='Виїхав за кордон')
     occupation = models.BooleanField(default=False, verbose_name='Під окупацією')
     credited = models.BooleanField(default=False, verbose_name='Закредитований')
     bankrupt = models.BooleanField(default=False, verbose_name='Банкрот')
@@ -67,3 +61,26 @@ class ClientStatuses(models.Model):
 
     def __str__(self):
         return f"Статуси клієтна: {self.client}"
+
+
+class ClientSocialNetworks(models.Model):
+    """Соціальні мережі клієнта"""
+    client = models.OneToOneField(
+        Client,
+        unique=True,
+        on_delete=models.CASCADE,
+        verbose_name="Клієнт",
+        primary_key=True
+    )
+    facebook = models.URLField(max_length=128, unique=True, blank=True, verbose_name="Facebook")
+    linkedin = models.URLField(max_length=128, unique=True, blank=True, verbose_name="LinkedIn")
+    instagram = models.URLField(max_length=128, unique=True, blank=True, verbose_name="Instagram")
+    tictok = models.URLField(max_length=128, unique=True, blank=True, verbose_name="Tik Tok")
+
+    class Meta:
+        db_table = "client_social_networks"
+        verbose_name = "Соціальні мережі клієнта"
+        verbose_name_plural = "Соціальні мережі клієнтів"
+
+    def __str__(self):
+        return f"Соціальні мережі клієтна: {self.client}"

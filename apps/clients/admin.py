@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Client, ClientStatuses
+from .models import Client, ClientStatuses, ClientSocialNetworks
 
 
 @admin.register(Client)
@@ -17,5 +17,10 @@ class ClientStatusesAdmin(admin.ModelAdmin):
                     )
     list_per_page = 20
     list_filter = ("client",)
-    search_fields = ("client",)
 
+
+@admin.register(ClientSocialNetworks)
+class ClientSocialNetworksAdmin(admin.ModelAdmin):
+    list_display = ("client", 'facebook', 'linkedin', 'instagram', 'tictok')
+    list_per_page = 20
+    list_filter = ("client",)

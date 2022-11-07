@@ -38,7 +38,7 @@ class Address(models.Model):
         verbose_name="Тип адреси"
     )
     index = models.CharField(max_length=8, blank=True, verbose_name="Індекс")
-    country = models.CharField(max_length=50, blank=False, default='Ukraine', verbose_name="Країна")
+    country = models.CharField(max_length=50, blank=False, default='Україна', verbose_name="Країна")
     province = models.CharField(max_length=50, blank=False, verbose_name="Область")
     district = models.CharField(max_length=50, blank=True, verbose_name="Район")
     type_city = models.CharField(
@@ -82,8 +82,8 @@ class ClientAddress(Address):
         unique_together = (('person', 'type_address'),)
 
     def __str__(self):
-        return f"{self.client}: {self.country}, {self.index}, {self.province} обл., {self.district} р-н., {self.type_city}" \
-               f"{self.city}, {self.type_street}{self.street}, буд.{self.house}," \
+        return f"{self.country}, {self.index}, {self.province} обл., {self.district} р-н., {self.type_city}" \
+               f"{self.city}, {self.type_street} {self.street}, буд. {self.house}," \
                f" {self.apartment_type}{self.apartment_number}"
 
 

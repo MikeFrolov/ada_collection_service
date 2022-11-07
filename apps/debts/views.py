@@ -4,8 +4,11 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from datetime import date
 from .fields import create_form_fields
 from .models import Debt
+from apps.adresses.models import ClientAddress
+from apps.clients.models import Client, ClientStatuses, ClientSocialNetworks
 
 
 class ListDebtsView(ListView):
@@ -16,13 +19,6 @@ class ListDebtsView(ListView):
 
         if not filter_parameters:  # If no filtering parameters are entered
             debts = Debt.objects.all().order_by('id')
-        # TODO: Add pagination
-        # FIXME: Crashes if using pagination, Conflicting requests '?page=1' and '?age = 1'
-            # paginator = Paginator(students, 10)
-            # page_number = request.GET.get('page')
-            # page_obj = paginator.get_page(page_number)
-        # FIXME: Crashes if trying to enter a filter that does not exist
-        # TODO: Add filter name check
         else:
             debts = [obj for obj in Debt.objects.filter(**filter_parameters).order_by('id')]
         return render(request, self.template_name, {'debts': debts})  # List debts from database
@@ -39,10 +35,12 @@ class DebtDetailView(DetailView):
     model = Debt
     template_name = 'debts/debt_detail_v1.html'
 
-    def debt_detail_view(self, request, id):
-        try:
-            debt = Debt.objects.get(pk=id)
-        except Debt.DoesNotExist:
-            raise Http404('Debt does not exist')
+    def get_context_data(self, **kwargs):
+        context = super(DebtDetailView, self).get_context_data(**kwargs)
+        debt = Debt.objects.get(pk=self.kwargs.get('pk'))
 
-        return render(request, template_name, context={'debt': debt})
+        client_id = debt.client.id  # get client id from pk(request)
+        client_addresses = [address for address in ClientAddress.objects.all().filter(person=client_id)]
+
+        context['client_addresses'] = client_addresses
+        return context
