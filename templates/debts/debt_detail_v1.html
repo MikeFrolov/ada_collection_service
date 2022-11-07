@@ -65,7 +65,7 @@
                         </tr>
                         <tr>
                           <td colspan="2">Вік:</td>
-                          <td class="text-start"></td>
+                          <td class="text-start">{{ client_age }}</td>
                         </tr>
                         <tr>
                           <td colspan="2">Стать:</td>
@@ -79,18 +79,6 @@
                           <td colspan="2">Посада:</td>
                           <td class="text-start">{{ debt.client.position|safe }}</td>
                         </tr>
-                        <!--<tr>
-                          <td colspan="2">Адр.реєстрації:</td>
-                          <td class="text-start">{{ client_legal_address }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">Адр.проживання:</td>
-                          <td class="text-start">{{ client_physical_address }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">Роб.адреса:</td>
-                          <td class="text-start">{{ client_work_address }}</td>
-                        </tr>-->
                         {% for address in client_addresses %}
                             <tr>
 

@@ -11,6 +11,12 @@ from apps.adresses.models import ClientAddress
 from apps.clients.models import Client, ClientStatuses, ClientSocialNetworks
 
 
+def get_age(born_data: date) -> int:
+    # FIXME: Fix a bug from February 29
+    today = date.today()
+    return today.year - born_data.year - ((today.month, today.day) < (born_data.month, born_data.day))
+
+
 class ListDebtsView(ListView):
     template_name = 'debts/list_debts.html'
 
@@ -38,6 +44,9 @@ class DebtDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(DebtDetailView, self).get_context_data(**kwargs)
         debt = Debt.objects.get(pk=self.kwargs.get('pk'))
+
+        client_age = get_age(debt.client.date_of_birth)
+        context['client_age'] = client_age
 
         client_id = debt.client.id  # get client id from pk(request)
         client_addresses = [address for address in ClientAddress.objects.all().filter(person=client_id)]
