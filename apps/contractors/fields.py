@@ -3,7 +3,5 @@ create_form_fields = [
     'edrpou',
     'title',
     'email',
-    'phone',
-    'address',
-    'post_address'
+    'phone'
 ]

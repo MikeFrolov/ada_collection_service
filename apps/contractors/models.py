@@ -23,8 +23,6 @@ class Contractor(models.Model):
     title = models.CharField(max_length=150, null=False, blank=False, verbose_name="Назва компанії", unique=True)
     email = models.EmailField(max_length=255, verbose_name="Електронна пошта")
     phone = PhoneNumberField(null=True, blank=False, unique=True, verbose_name="Номер телефону")
-    address = models.JSONField(null=True, blank=True, verbose_name="Адреса")
-    post_address = models.JSONField(null=True, blank=True, verbose_name="Поштова адреса")
 
     class Meta:
         db_table = "contractor"

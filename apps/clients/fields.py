@@ -11,9 +11,8 @@ create_form_fields = [
                     'ipn',
                     'passport_serial',
                     'passport_number',
-                    'addresses',
                     'employer',
+                    'position',
                     'created_date',
                     'update_date',
-                    'comment'
                     ]
