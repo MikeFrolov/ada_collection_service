@@ -53,35 +53,34 @@
                       <tbody>
                         <tr>
                           <td colspan="2">ІПН:</td>
-                          <td class="text-start">{{ debt.client.ipn|stringformat:"010d" }}</td>
+                          <td class="text-end">{{ debt.client.ipn|stringformat:"010d" }}</td>
                         </tr>
                         <tr>
                           <td colspan="2">Паспорт:</td>
-                          <td class="text-start">{{ debt.client.passport_serial }} {{ debt.client.passport_number|stringformat:"06d" }}</td>
+                          <td class="text-end">{{ debt.client.passport_serial }} {{ debt.client.passport_number|stringformat:"06d" }}</td>
                         </tr>
                         <tr>
                           <td colspan="2">Дата народження:</td>
-                          <td class="text-start">{{ debt.client.date_of_birth|date:"d.m.Y" }}</td>
+                          <td class="text-end">{{ debt.client.date_of_birth|date:"d.m.Y" }}</td>
                         </tr>
                         <tr>
                           <td colspan="2">Вік:</td>
-                          <td class="text-start">{{ client_age }}</td>
+                          <td class="text-end">{{ client_age }}</td>
                         </tr>
                         <tr>
                           <td colspan="2">Стать:</td>
-                          <td class="text-start">{{ debt.client.gender|safe }}</td>
+                          <td class="text-end">{{ debt.client.gender|safe }}</td>
                         </tr>
                         <tr>
                           <td colspan="2">Роботодавець:</td>
-                          <td class="text-start">{{ debt.client.employer|safe }}</td>
+                          <td class="text-end">{{ debt.client.employer|safe }}</td>
                         </tr>
                         <tr>
                           <td colspan="2">Посада:</td>
-                          <td class="text-start">{{ debt.client.position|safe }}</td>
+                          <td class="text-end   ">{{ debt.client.position|safe }}</td>
                         </tr>
                         {% for address in client_addresses %}
                             <tr>
-
                                 <td colspan="2">
                                     {% if address.type_address == "Legal address" %}
                                     Адр.реєстрації:
@@ -93,7 +92,7 @@
                                     Адр.компанії клієнта:
                                     {% endif %}
                                 </td>
-                                <td class="text-start">{{ address }}</td>
+                                <td class="text-end">{{ address }}</td>
                             </tr>
                         {% endfor %}
                       </tbody>
@@ -108,39 +107,103 @@
                       <tbody>
                         <tr>
                           <td colspan="2">Військовий:</td>
-                          <td>Так/Ні</td>
+                            <!-- ==== Military status ==== -->
+                            <td>
+                                {% if client_statuses.military == True %}
+                                    Так
+                                {% elif client_statuses.military == False %}
+                                    Ні
+                                {% endif %}
+                            </td>
                         </tr>
                         <tr>
                           <td colspan="2">Тимчасово переміщений:</td>
-                          <td>Так/Ні</td>
+                          <!-- ==== Displaced status ==== -->
+                          <td>
+                            {% if client_statuses.displaced == True %}
+                                Так
+                            {% elif client_statuses.displaced == False %}
+                                Ні
+                            {% endif %}
+                          </td>
                         </tr>
                         <tr>
-                          <td colspan="2">Віїхав за кордон:</td>
-                          <td>Так/Ні</td>
+                          <td colspan="2">Виїхав за кордон:</td>
+                          <!-- ==== Abroad status ==== -->
+                          <td>
+                            {% if client_statuses.abroad == True %}
+                                Так
+                            {% elif client_statuses.abroad == False %}
+                                Ні
+                            {% endif %}
+                          </td>
                         </tr>
                         <tr>
                           <td colspan="2">Під окупацією:</td>
-                          <td>Так/Ні</td>
+                          <!-- ==== Occupation status ==== -->
+                          <td>
+                            {% if client_statuses.occupation == True %}
+                                Так
+                            {% elif client_statuses.occupation == False %}
+                                Ні
+                            {% endif %}
+                          </td>
                         </tr>
                         <tr>
                           <td colspan="2">Закредитований:</td>
-                          <td>Так/Ні</td>
+                          <!-- ==== Credited status ==== -->
+                          <td>
+                            {% if client_statuses.credited == True %}
+                                Так
+                            {% elif client_statuses.credited == False %}
+                                Ні
+                            {% endif %}
+                          </td>
                         </tr>
                         <tr>
                           <td colspan="2">Банкрот:</td>
-                          <td>Так/Ні</td>
+                          <!-- ==== Bankrupt status ==== -->
+                          <td>
+                            {% if client_statuses.bankrupt == True %}
+                                Так
+                            {% elif client_statuses.bankrupt == False %}
+                                Ні
+                            {% endif %}
+                          </td>
                         </tr>
                         <tr>
                           <td colspan="2">Тюрма:</td>
-                          <td>Так/Ні</td>
+                          <!-- ==== Imprisoned status ==== -->
+                          <td>
+                            {% if client_statuses.imprisoned == True %}
+                                Так
+                            {% elif client_statuses.imprisoned == False %}
+                                Ні
+                            {% endif %}
+                          </td>
+                        </tr>
                         </tr>
                         <tr>
                           <td colspan="2">Хвороба:</td>
-                          <td>Так/Ні</td>
+                          <!-- ==== Illness status ==== -->
+                          <td>
+                            {% if client_statuses.illness == True %}
+                                Так
+                            {% elif client_statuses.illness == False %}
+                                Ні
+                            {% endif %}
+                          </td>
                         </tr>
                         <tr>
                           <td colspan="2">Смерть:</td>
-                          <td>Так/Ні</td>
+                          <!-- ==== Death status ==== -->
+                          <td>
+                            {% if client_statuses.death == True %}
+                                Так
+                            {% elif client_statuses.death == False %}
+                                Ні
+                            {% endif %}
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -156,19 +219,43 @@
                           <tbody>
                             <tr>
                               <td colspan="2">Facebook:</td>
-                              <td>Посилання</td>
+                              <td>
+                                  {% if client_networks.facebook %}
+                                    <a href="{{ client_networks.facebook }}" class="btn-link" target="_blank">
+                                        Перейти
+                                    </a>
+                                  {% endif %}
+                              </td>
                             </tr>
                             <tr>
                               <td colspan="2">LinkedIn:</td>
-                              <td>Посилання</td>
+                              <td>
+                                  {% if client_networks.linkedin %}
+                                    <a href="{{ client_networks.linkedin }}" class="btn-link" target="_blank">
+                                        Перейти
+                                    </a>
+                                  {% endif %}
+                              </td>
                             </tr>
                             <tr>
                               <td colspan="2">Instagram:</td>
-                              <td>Посилання</td>
+                              <td>
+                                  {% if client_networks.instagram %}
+                                    <a href="{{ client_networks.instagram }}" class="btn-link" target="_blank">
+                                        Перейти
+                                    </a>
+                                  {% endif %}
+                              </td>
                             </tr>
                             <tr>
                               <td colspan="2">Tik Tok:</td>
-                              <td>Посилання</td>
+                              <td>
+                                  {% if client_networks.tictok %}
+                                    <a href="{{ client_networks.tictok }}" class="btn-link" target="_blank">
+                                        Перейти
+                                    </a>
+                                  {% endif %}
+                              </td>
                             </tr>
                           </tbody>
                         </table>

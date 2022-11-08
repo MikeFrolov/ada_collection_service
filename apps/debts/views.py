@@ -43,13 +43,15 @@ class DebtDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(DebtDetailView, self).get_context_data(**kwargs)
-        debt = Debt.objects.get(pk=self.kwargs.get('pk'))
+        debt = Debt.objects.get(pk=self.kwargs.get('pk'))  # get client data from db
 
-        client_age = get_age(debt.client.date_of_birth)
-        context['client_age'] = client_age
+        context['client_age'] = get_age(debt.client.date_of_birth)  # calculate client age from birthdate
 
         client_id = debt.client.id  # get client id from pk(request)
-        client_addresses = [address for address in ClientAddress.objects.all().filter(person=client_id)]
+        context['client_addresses'] = [address for address in ClientAddress.objects.all().filter(person=client_id)]  # get client addresses from db
 
-        context['client_addresses'] = client_addresses
+        context['client_statuses'] = ClientStatuses.objects.get(client=client_id)  # get client statuses from db
+
+        context['client_networks'] = ClientSocialNetworks.objects.get(client=client_id)  # get client social networks from db
+
         return context
