@@ -317,7 +317,142 @@
             </div>
         </div>
         <!-- ==== TAB Debt ==== -->
-        <div class="tab-pane" id="debt"><br>Дані по договору/справі</div>
+        <div class="tab-pane" id="debt">
+            <div class="row g-2">
+                <!-- ==== First block with data on debt ==== -->
+                <div class="col-lg-4">
+                    <table class="table p-1">
+                      <thead>
+                        <tr>
+                            <h5 class="p-1 text-center bg-light">Заключення</h5>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td colspan="2">№ договору в базі:</td>
+                          <td class="text-end">{{ debt.id|stringformat:"07d" }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">№ договору в базі контрагента:</td>
+                          <td class="text-end">{{ debt.number_from_contractor|safe }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Дата заключення договору:</td>
+                          <td class="text-end">{{ debt.date_of_creation|date:"d.m.Y" }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Дата закінчення договору:</td>
+                          <td class="text-end">{{ debt.end_date|date:"d.m.Y" }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Компанія що видала кредит:</td>
+                            <td class="text-end">{{ debt.credit_company|safe }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Бренд під яким видано кредит:</td>
+                            <td class="text-end">{{ debt.credit_brand|safe }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Назва контрагента:</td>
+                            <td class="text-end">{{ debt.title_contractor|safe }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Загальна сума виданих коштів:</td>
+                            <td class="text-end">{{ debt.total_issued_amount|safe }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Валюта:</td>
+                            <td class="text-end">{{ debt.currency|safe }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Дата виникнення просрочки:</td>
+                            <td class="text-end">{{ debt.delay_date|date:"d.m.Y" }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Кількість днів просрочки:</td>
+                            <td class="text-end">{{ delay_days }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <!-- ==== Second block with data on debt ==== -->
+                <div class="col-lg-4">
+                    <table class="table p-1">
+                      <thead>
+                        <tr>
+                            <h5 class="p-1 text-center bg-light">Структура боргу</h5>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td colspan="2">Сума основного боргу за кредитом:</td>
+                          <td class="text-end">{{ debt.principal|safe }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Комісії:</td>
+                          <td class="text-end">{{ debt.commission|safe }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Відсотки:</td>
+                          <td class="text-end">{{ debt.interest|safe }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Пеня:</td>
+                          <td class="text-end">{{ debt.penalty|safe }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Штрафи:</td>
+                          <td class="text-end">{{ debt.fines|safe }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Поточний борг:</td>
+                          <td class="text-end">{{ debt.current_debt|safe }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <!-- ==== The third block with data on debt ==== -->
+                <div class="col-lg-4">
+                    <table class="table p-1">
+                      <thead>
+                        <tr>
+                            <h5 class="p-1 text-center bg-light">Інформація по платежам</h5>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td colspan="2">Сума щомісячного платежу:</td>
+                          <td class="text-end">{{ debt.monthly_payment_amount|safe }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Кількість платежів:</td>
+                          <td class="text-end">{{ debt.payment_amounts|safe }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Кількість прострочених платежів:</td>
+                          <td class="text-end">{{ debt.number_of_late_payments|safe }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Загальна сума оплачених коштів:</td>
+                          <td class="text-end">{{ debt.amount_of_payments|safe }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Загальна сума продовжень:</td>
+                          <td class="text-end">{{ debt.total_prolongation_amount|safe }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Дата останнього платежу:</td>
+                          <td class="text-end">{{ debt.last_payment_date|date:"d.m.Y" }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Сума останнього платежу:</td>
+                          <td class="text-end">{{ debt.last_payment_amount|safe }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
         <!-- ==== TAB Communication ==== -->
         <div class="tab-pane" id="communication">Коммунікація з клієнтом.</div>
     </div>

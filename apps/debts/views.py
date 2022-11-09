@@ -11,10 +11,15 @@ from apps.adresses.models import ClientAddress
 from apps.clients.models import Client, ClientStatuses, ClientSocialNetworks
 
 
-def get_age(born_data: date) -> int:
+def get_age(born_date: date) -> int:
     # FIXME: Fix a bug from February 29
     today = date.today()
-    return today.year - born_data.year - ((today.month, today.day) < (born_data.month, born_data.day))
+    return today.year - born_date.year - ((today.month, today.day) < (born_date.month, born_date.day))
+
+
+def calculate_number_of_days(start_date: date) -> int:
+    delta = date.today() - start_date
+    return delta.days
 
 
 class ListDebtsView(ListView):
@@ -53,5 +58,7 @@ class DebtDetailView(DetailView):
         context['client_statuses'] = ClientStatuses.objects.get(client=client_id)  # get client statuses from db
 
         context['client_networks'] = ClientSocialNetworks.objects.get(client=client_id)  # get client social networks from db
+
+        context['delay_days'] = calculate_number_of_days(debt.delay_date)
 
         return context
