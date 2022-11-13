@@ -7,11 +7,25 @@ from apps.contractor_managers.models import ContractorManager
 
 class Debt(models.Model):
     """Справа(Договір)"""
+    class ContractType(models.TextChoices):
+        ST = "Короткостроковий", "Короткостроковий",
+        LT = "Довгостроковий", "Довгостроковий",
+        OV = "Овердрафт", "Овердрафт",
+        CO = "Споживчий", "Споживчий",
+        CL = "Кредитна лінія", "Кредитна лінія",
+        SС = "Забезпечений заставою", "Забезпечений заставою",
+
     class CurrencyChoices(models.TextChoices):
         USD = 'USD', 'US Dollar',
         EUR = 'EUR', 'Euro',
         UAH = 'UAH', 'Гривня',
 
+    debt_type = models.CharField(
+        max_length=21,
+        default=ContractType.ST,
+        choices=ContractType.choices,
+        verbose_name="Тип договору"
+    )
     origin_number = models.CharField(
         max_length=15,
         blank=False,
@@ -63,7 +77,6 @@ class Debt(models.Model):
         verbose_name="Валюта"
     )
     delay_date = models.DateField(verbose_name="Дата виникнення просрочки")
-    delay_days = models.IntegerField(null=True, blank=True, default=0, verbose_name="Кількість днів просрочки")
 
     class Meta:
         db_table = "debt"

@@ -12,10 +12,10 @@
     <div class="card">
         <div class="card-header opacity-75">
             <div class="row">
-                <div class="col-lg-4"><h5>{{ debt.client|safe }}</h5></div>
+                <div class="col-lg-4"><h5><b>{{ debt.client|safe }}</b></h5></div>
                 <div class="col-lg-3"></div>
                 <div class="col-lg-3"></div>
-                <div class="col-lg-2"><h5>#{{ debt.origin_number }}</h5></div>
+                <div class="col-lg-2"><h5><b>#{{ debt.origin_number }}</b></h5></div>
             </div>
         </div>
     </div>
@@ -28,13 +28,13 @@
     <!-- ==== NAVBAR block with inner tabs ==== -->
     <ul class="nav nav-tabs">
         <li class="nav-item">
-        <a class="nav-link active" data-bs-toggle="tab" href="#client">Клієнт</a>
+        <a class="nav-link active" data-bs-toggle="tab" href="#client"><b>Клієнт</b></a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#debt">Договір</a>
+        <a class="nav-link" data-bs-toggle="tab" href="#debt"><b>Договір</b></a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#communication">Коммунікація</a>
+        <a class="nav-link" data-bs-toggle="tab" href="#communication"><b>Коммунікація</b></a>
         </li>
     </ul>
     <!-- ==== TAB panes  with content ==== -->
@@ -47,52 +47,57 @@
                     <table class="table p-1">
                       <thead>
                         <tr>
-                            <h5 class="p-1 text-center bg-light">Дані клієнта</h5>
+                            <h5 class="p-1 text-center bg-light">
+                                <div class="row g-2">
+                                    <div class="col-lg-11">Дані клієнта</div>
+                                    <div class="col-lg-1"><small>Edit</small></div>
+                                </div>
+                            </h5>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td colspan="2">ІПН:</td>
-                          <td class="text-end">{{ debt.client.ipn|stringformat:"010d" }}</td>
+                          <td colspan="2"><b>ІПН:</b></td>
+                          <td class="text-end"><i>{{ debt.client.ipn|stringformat:"010d" }}</i></td>
                         </tr>
                         <tr>
-                          <td colspan="2">Паспорт:</td>
-                          <td class="text-end">{{ debt.client.passport_serial }} {{ debt.client.passport_number|stringformat:"06d" }}</td>
+                          <td colspan="2"><b>Паспорт:</b></td>
+                          <td class="text-end"><i>{{ debt.client.passport_serial }} {{ debt.client.passport_number|stringformat:"06d" }}</i></td>
                         </tr>
                         <tr>
-                          <td colspan="2">Дата народження:</td>
-                          <td class="text-end">{{ debt.client.date_of_birth|date:"d.m.Y" }}</td>
+                          <td colspan="2"><b>Дата народження:</b></td>
+                          <td class="text-end"><i>{{ debt.client.date_of_birth|date:"d.m.Y" }}</i></td>
                         </tr>
                         <tr>
-                          <td colspan="2">Вік:</td>
-                          <td class="text-end">{{ client_age }}</td>
+                          <td colspan="2"><b>Вік:</b></td>
+                          <td class="text-end"><i>{{ client_age }}</i></td>
                         </tr>
                         <tr>
-                          <td colspan="2">Стать:</td>
-                          <td class="text-end">{{ debt.client.gender|safe }}</td>
+                          <td colspan="2"><b>Стать:</b></td>
+                          <td class="text-end"><i>{{ debt.client.gender|safe }}</i></td>
                         </tr>
                         <tr>
-                          <td colspan="2">Роботодавець:</td>
-                          <td class="text-end">{{ debt.client.employer|safe }}</td>
+                          <td colspan="2"><b>Роботодавець:</b></td>
+                          <td class="text-end"><i>{{ debt.client.employer|safe }}</i></td>
                         </tr>
                         <tr>
-                          <td colspan="2">Посада:</td>
-                          <td class="text-end   ">{{ debt.client.position|safe }}</td>
+                          <td colspan="2"><b>Посада:</b></td>
+                          <td class="text-end"><i>{{ debt.client.position|safe }}</i></td>
                         </tr>
                         {% for address in client_addresses %}
                             <tr>
                                 <td colspan="2">
                                     {% if address.type_address == "Legal address" %}
-                                    Адр.реєстрації:
+                                    <b>Адр.реєстрації:</b>
                                     {% elif address.type_address == "Physical address"%}
-                                    Адр.проживання:
+                                    <b>Адр.проживання:</b>
                                     {% elif address.type_address == "Work address"%}
-                                    Роб.адреса:
+                                    <b>Роб.адреса:</b>
                                     {% elif address.type_address == "Company address"%}
-                                    Адр.компанії клієнта:
+                                    <b>Адр.компанії клієнта:</b>
                                     {% endif %}
                                 </td>
-                                <td class="text-end">{{ address }}</td>
+                                <td class="text-end"><i><small>{{ address }}</small></i></td>
                             </tr>
                         {% endfor %}
                       </tbody>
@@ -102,107 +107,120 @@
                 <div class="col-lg-4">
                     <table class="table p-1">
                       <thead>
-                        <tr><h5 class=" p-1 text-center bg-light">Статуси</h5></tr>
+                        <tr>
+                            <h5 class="p-1 text-center bg-light">
+                                <div class="row g-2">
+                                    <div class="col-lg-11">Статуси</div>
+                                    <div class="col-lg-1"><small>Edit</small></div>
+                                </div>
+                            </h5>
+                        </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td colspan="2">Військовий:</td>
+                          <td colspan="2"><b>Військовий:</b></td>
                             <!-- ==== Military status ==== -->
                             <td>
-                                {% if client_statuses.military == True %}
-                                    Так
-                                {% elif client_statuses.military == False %}
-                                    Ні
-                                {% endif %}
+                                <i>
+                                    {% if client_statuses.military == True %}
+                                        <b>Так</b>
+                                    {% elif client_statuses.military == False %}
+                                        Ні
+                                    {% endif %}
+                                </i>
                             </td>
                         </tr>
                         <tr>
-                          <td colspan="2">Тимчасово переміщений:</td>
+                          <td colspan="2"><b>Тимчасово переміщений:</b></td>
                           <!-- ==== Displaced status ==== -->
                           <td>
-                            {% if client_statuses.displaced == True %}
-                                Так
-                            {% elif client_statuses.displaced == False %}
-                                Ні
-                            {% endif %}
+                              <i>
+                                {% if client_statuses.displaced == True %}
+                                    <b>Так</b>
+                                {% elif client_statuses.displaced == False %}
+                                    Ні
+                                {% endif %}
+                              </i>
                           </td>
                         </tr>
                         <tr>
-                          <td colspan="2">Виїхав за кордон:</td>
+                          <td colspan="2"><b>Виїхав за кордон:</b></td>
                           <!-- ==== Abroad status ==== -->
                           <td>
                             {% if client_statuses.abroad == True %}
-                                Так
+                                <b><i>Так</i></b>
                             {% elif client_statuses.abroad == False %}
-                                Ні
+                                <i>Ні</i>
                             {% endif %}
                           </td>
                         </tr>
                         <tr>
-                          <td colspan="2">Під окупацією:</td>
+                          <td colspan="2"><b>Під окупацією:</b></td>
                           <!-- ==== Occupation status ==== -->
                           <td>
                             {% if client_statuses.occupation == True %}
-                                Так
+                                <b><i>Так</i></b>
                             {% elif client_statuses.occupation == False %}
-                                Ні
+                                <i>Ні</i>
                             {% endif %}
                           </td>
                         </tr>
                         <tr>
-                          <td colspan="2">Закредитований:</td>
+                          <td colspan="2"><b>Закредитований:</b></td>
                           <!-- ==== Credited status ==== -->
                           <td>
                             {% if client_statuses.credited == True %}
-                                Так
+                                <b><i>Так</i></b>
                             {% elif client_statuses.credited == False %}
-                                Ні
+                                <i>Ні</i>
                             {% endif %}
                           </td>
                         </tr>
                         <tr>
-                          <td colspan="2">Банкрот:</td>
+                          <td colspan="2"><b>Банкрот:</b></td>
                           <!-- ==== Bankrupt status ==== -->
                           <td>
                             {% if client_statuses.bankrupt == True %}
-                                Так
+                                <b><i>Так</i></b>
                             {% elif client_statuses.bankrupt == False %}
-                                Ні
+                                <i>Ні</i>
                             {% endif %}
                           </td>
                         </tr>
                         <tr>
-                          <td colspan="2">Тюрма:</td>
+                          <td colspan="2"><b>Тюрма:</b></td>
                           <!-- ==== Imprisoned status ==== -->
                           <td>
                             {% if client_statuses.imprisoned == True %}
-                                Так
+                                <b><i>Так</i></b>
                             {% elif client_statuses.imprisoned == False %}
-                                Ні
+                                <i>Ні</i>
                             {% endif %}
                           </td>
                         </tr>
                         </tr>
                         <tr>
-                          <td colspan="2">Хвороба:</td>
+                          <td colspan="2"><b>Хвороба:</b></td>
                           <!-- ==== Illness status ==== -->
                           <td>
                             {% if client_statuses.illness == True %}
-                                Так
+                                <b><i>Так</i></b>
                             {% elif client_statuses.illness == False %}
-                                Ні
+                                <i>Ні</i>
                             {% endif %}
                           </td>
                         </tr>
                         <tr>
-                          <td colspan="2">Смерть:</td>
+                          <td colspan="2"><b>Смерть:</b></td>
                           <!-- ==== Death status ==== -->
                           <td>
-                            {% if client_statuses.death == True %}
-                                Так
-                            {% elif client_statuses.death == False %}
-                                Ні
-                            {% endif %}
+                              <i>
+                                {% if client_statuses.death == True %}
+                                    <b>Так</b>
+                                {% elif client_statuses.death == False %}
+                                    Ні
+                                {% endif %}
+                              </i>
                           </td>
                         </tr>
                       </tbody>
@@ -214,11 +232,18 @@
                     <div class="col-lg-12">
                         <table class="table p-1">
                           <thead>
-                            <tr><h5 class="p-1 text-center bg-light">Соціальні мережі</h5></tr>
+                            <tr>
+                                <h5 class="p-1 text-center bg-light">
+                                    <div class="row g-2">
+                                        <div class="col-lg-11">Соціальні мережі</div>
+                                        <div class="col-lg-1"><small>Edit</small></div>
+                                    </div>
+                                </h5>
+                            </tr>
                           </thead>
                           <tbody>
                             <tr>
-                              <td colspan="2">Facebook:</td>
+                              <td colspan="2"><b>Facebook:</b></td>
                               <td>
                                   {% if client_networks.facebook %}
                                     <a href="{{ client_networks.facebook }}" class="btn-link" target="_blank">
@@ -228,7 +253,7 @@
                               </td>
                             </tr>
                             <tr>
-                              <td colspan="2">LinkedIn:</td>
+                              <td colspan="2"><b>LinkedIn:</b></td>
                               <td>
                                   {% if client_networks.linkedin %}
                                     <a href="{{ client_networks.linkedin }}" class="btn-link" target="_blank">
@@ -238,7 +263,7 @@
                               </td>
                             </tr>
                             <tr>
-                              <td colspan="2">Instagram:</td>
+                              <td colspan="2"><b>Instagram:</b></td>
                               <td>
                                   {% if client_networks.instagram %}
                                     <a href="{{ client_networks.instagram }}" class="btn-link" target="_blank">
@@ -248,7 +273,7 @@
                               </td>
                             </tr>
                             <tr>
-                              <td colspan="2">Tik Tok:</td>
+                              <td colspan="2"><b>Tik Tok:</b></td>
                               <td>
                                   {% if client_networks.tictok %}
                                     <a href="{{ client_networks.tictok }}" class="btn-link" target="_blank">
@@ -268,13 +293,13 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td colspan="2">Кількість справ в системі:</td>
+                              <td colspan="2"><b>Кількість справ в системі:</b></td>
                               <td>
                                 {{ debt.client.debt_set.all.count }}
                               </td>
                             </tr>
                             <tr>
-                              <td colspan="2">Кількість виконавчих впроваджень:</td>
+                              <td colspan="2"><b>Кількість виконавчих впроваджень:</b></td>
                               <td>4</td>
                             </tr>
                           </tbody>
@@ -320,7 +345,7 @@
         <div class="tab-pane" id="debt">
             <div class="row g-2">
                 <!-- ==== First block with data on debt ==== -->
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <table class="table p-1">
                       <thead>
                         <tr>
@@ -329,132 +354,145 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td colspan="2">№ договору в базі:</td>
-                          <td class="text-end">{{ debt.id|stringformat:"07d" }}</td>
+                          <td colspan="2"><b>№ договору в базі:</b></td>
+                          <td class="text-end"><i>{{ debt.id|stringformat:"07d" }}</i></td>
                         </tr>
                         <tr>
-                          <td colspan="2">№ договору в базі контрагента:</td>
-                          <td class="text-end">{{ debt.number_from_contractor|safe }}</td>
+                          <td colspan="2"><b>№ договору в базі контрагента:</b></td>
+                          <td class="text-end"><i>{{ debt.number_from_contractor|safe }}</i></td>
                         </tr>
                         <tr>
-                          <td colspan="2">Дата заключення договору:</td>
-                          <td class="text-end">{{ debt.date_of_creation|date:"d.m.Y" }}</td>
+                          <td colspan="2"><b>Тип договору:</b></td>
+                          <td class="text-end"><i>{{ debt.debt_type|safe }}</i></td>
                         </tr>
                         <tr>
-                          <td colspan="2">Дата закінчення договору:</td>
-                          <td class="text-end">{{ debt.end_date|date:"d.m.Y" }}</td>
+                          <td colspan="2"><b>Дата заключення договору:</b></td>
+                          <td class="text-end"><i>{{ debt.date_of_creation|date:"d.m.Y" }}</i></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Компанія що видала кредит:</td>
-                            <td class="text-end">{{ debt.credit_company|safe }}</td>
+                          <td colspan="2"><b>Дата закінчення договору:</b></td>
+                          <td class="text-end"><i>{{ debt.end_date|date:"d.m.Y" }}</i></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Бренд під яким видано кредит:</td>
-                            <td class="text-end">{{ debt.credit_brand|safe }}</td>
+                            <td colspan="2"><b>Компанія що видала кредит:</b></td>
+                            <td class="text-end"><i>{{ debt.credit_company|safe }}</i></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Назва контрагента:</td>
-                            <td class="text-end">{{ debt.title_contractor|safe }}</td>
+                            <td colspan="2"><b>Бренд під яким видано кредит:</b></td>
+                            <td class="text-end"><i>{{ debt.credit_brand|safe }}</i></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Загальна сума виданих коштів:</td>
-                            <td class="text-end">{{ debt.total_issued_amount|safe }}</td>
+                            <td colspan="2"><b>Назва контрагента:</b></td>
+                            <td class="text-end"><i>{{ debt.title_contractor|safe }}</i></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Валюта:</td>
-                            <td class="text-end">{{ debt.currency|safe }}</td>
+                            <td colspan="2"><b>Початкова сума виданих коштів:</b></td>
+                            <td class="text-end"><i>{{ debt.initial_amount|safe }}</i></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Дата виникнення просрочки:</td>
-                            <td class="text-end">{{ debt.delay_date|date:"d.m.Y" }}</td>
+                            <td colspan="2"><b>Загальна сума виданих коштів:</b></td>
+                            <td class="text-end"><i>{{ debt.total_issued_amount|safe }}</i></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Кількість днів просрочки:</td>
-                            <td class="text-end">{{ delay_days }}</td>
+                            <td colspan="2"><b>Валюта:</b></td>
+                            <td class="text-end"><i>{{ debt.currency|safe }}</i></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Дата виникнення просрочки:</b></td>
+                            <td class="text-end"><i>{{ debt.delay_date|date:"d.m.Y" }}</i></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Кількість днів просрочки:</b></td>
+                            <td class="text-end"><i>{{ delay_days }}</i></td>
                         </tr>
                       </tbody>
                     </table>
                 </div>
-                <!-- ==== Second block with data on debt ==== -->
-                <div class="col-lg-4">
-                    <table class="table p-1">
-                      <thead>
-                        <tr>
-                            <h5 class="p-1 text-center bg-light">Структура боргу</h5>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td colspan="2">Сума основного боргу за кредитом:</td>
-                          <td class="text-end">{{ debt.principal|safe }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">Комісії:</td>
-                          <td class="text-end">{{ debt.commission|safe }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">Відсотки:</td>
-                          <td class="text-end">{{ debt.interest|safe }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">Пеня:</td>
-                          <td class="text-end">{{ debt.penalty|safe }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">Штрафи:</td>
-                          <td class="text-end">{{ debt.fines|safe }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">Поточний борг:</td>
-                          <td class="text-end">{{ debt.current_debt|safe }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                </div>
-                <!-- ==== The third block with data on debt ==== -->
-                <div class="col-lg-4">
-                    <table class="table p-1">
-                      <thead>
-                        <tr>
-                            <h5 class="p-1 text-center bg-light">Інформація по платежам</h5>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td colspan="2">Сума щомісячного платежу:</td>
-                          <td class="text-end">{{ debt.monthly_payment_amount|safe }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">Кількість платежів:</td>
-                          <td class="text-end">{{ debt.payment_amounts|safe }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">Кількість прострочених платежів:</td>
-                          <td class="text-end">{{ debt.number_of_late_payments|safe }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">Загальна сума оплачених коштів:</td>
-                          <td class="text-end">{{ debt.amount_of_payments|safe }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">Загальна сума продовжень:</td>
-                          <td class="text-end">{{ debt.total_prolongation_amount|safe }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">Дата останнього платежу:</td>
-                          <td class="text-end">{{ debt.last_payment_date|date:"d.m.Y" }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">Сума останнього платежу:</td>
-                          <td class="text-end">{{ debt.last_payment_amount|safe }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                <!-- ==== Second and third block with data on debt ==== -->
+                <div class="col-lg-6">
+                    <!-- ==== Second block with data on debt ==== -->
+                    <div class="col-lg-12">
+                        <table class="table p-1">
+                          <thead>
+                            <tr>
+                                <h5 class="p-1 text-center bg-light">Структура боргу</h5>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td colspan="2"><b>Сума основного боргу за кредитом:</b></td>
+                              <td class="text-end"><i>{{ debt.principal|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Комісії:</b></td>
+                              <td class="text-end"><i>{{ debt.commission|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Відсотки:</b></td>
+                              <td class="text-end"><i>{{ debt.interest|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Пеня:</b></td>
+                              <td class="text-end"><i>{{ debt.penalty|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Штрафи:</b></td>
+                              <td class="text-end"><i>{{ debt.fines|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Поточний борг:</b></td>
+                              <td class="text-end"><i>{{ debt.current_debt|safe }}</i></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                    <!-- ==== The third block with data on debt ==== -->
+                    <div class="col-lg-12">
+                        <table class="table p-1">
+                          <thead>
+                            <tr>
+                                <h5 class="p-1 text-center bg-light">Інформація по платежам</h5>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td colspan="2"><b>Сума щомісячного платежу:</b></td>
+                              <td class="text-end"><i>{{ debt.monthly_payment_amount|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Кількість платежів:</b></td>
+                              <td class="text-end"><i>{{ debt.payment_amounts|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Кількість прострочених платежів:</b></td>
+                              <td class="text-end"><i>{{ debt.number_of_late_payments|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Загальна сума оплачених коштів:</b></td>
+                              <td class="text-end"><i>{{ debt.amount_of_payments|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Загальна сума продовжень:</b></td>
+                              <td class="text-end"><i>{{ debt.total_prolongation_amount|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Дата останнього платежу:</b></td>
+                              <td class="text-end"><i>{{ debt.last_payment_date|date:"d.m.Y" }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Сума останнього платежу:</b></td>
+                              <td class="text-end"><i>{{ debt.last_payment_amount|safe }}</i></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
         <!-- ==== TAB Communication ==== -->
-        <div class="tab-pane" id="communication">Коммунікація з клієнтом.</div>
+        <div class="tab-pane" id="communication">
+
+        </div>
     </div>
 </div>
 <!-- END content block -->

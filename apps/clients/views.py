@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from .fields import create_form_fields
 from .models import Client
@@ -22,7 +22,14 @@ class ListClientsView(ListView):
         return render(request, self.template_name, {'clients': clients})  # List clients from database
 
 
-class CreateClientFormView(CreateView):  # Fixme: add 'LoginRequiredMixin, ' in first argument
+class CreateClientFormView(CreateView):  # TODO: add 'LoginRequiredMixin, ' in first argument
+    template_name = 'clients/create_client_form.html'
+    model = Client
+    fields = create_form_fields
+    success_url = reverse_lazy('list_clients')
+
+
+class EditClientFormView(UpdateView):  # TODO: add 'LoginRequiredMixin, ' in first argument
     template_name = 'clients/create_client_form.html'
     model = Client
     fields = create_form_fields
