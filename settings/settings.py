@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
+import socket
 from pathlib import Path
 from os import path
 import dj_database_url
@@ -29,7 +30,7 @@ DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 CSRF_COOKIE_SECURE = bool(os.environ.get('CSRF_COOKIE_SECURE', True))
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+ALLOWED_HOSTS = ['service-ada.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
