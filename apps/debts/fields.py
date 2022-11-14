@@ -24,5 +24,4 @@ create_form_fields = [
         'last_payment_amount',
         'currency',
         'delay_date',
-        'delay_days',
     ]
