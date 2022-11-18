@@ -72,10 +72,10 @@ class ClientSocialNetworks(models.Model):
         verbose_name="Клієнт",
         primary_key=True
     )
-    facebook = models.URLField(max_length=128, unique=True, blank=True, verbose_name="Facebook")
-    linkedin = models.URLField(max_length=128, unique=True, blank=True, verbose_name="LinkedIn")
-    instagram = models.URLField(max_length=128, unique=True, blank=True, verbose_name="Instagram")
-    tictok = models.URLField(max_length=128, unique=True, blank=True, verbose_name="Tik Tok")
+    facebook = models.URLField(max_length=128, blank=True, verbose_name="Facebook")
+    linkedin = models.URLField(max_length=128, blank=True, verbose_name="LinkedIn")
+    instagram = models.URLField(max_length=128, blank=True, verbose_name="Instagram")
+    tictok = models.URLField(max_length=128, blank=True, verbose_name="Tik Tok")
 
     class Meta:
         db_table = "client_social_networks"
