@@ -402,3 +402,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Instruction
+heroku_deploy_instruction.md
