@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
-from .fields import create_form_fields
+from .fields import client_form_fields
 from .models import Client
 from apps.debts.models import Debt
 
@@ -25,12 +25,12 @@ class ListClientsView(ListView):
 class CreateClientFormView(CreateView):  # TODO: add 'LoginRequiredMixin, ' in first argument
     template_name = 'clients/create_client_form.html'
     model = Client
-    fields = create_form_fields
+    fields = client_form_fields
     success_url = reverse_lazy('list_clients')
 
 
 class EditClientFormView(UpdateView):  # TODO: add 'LoginRequiredMixin, ' in first argument
     template_name = 'clients/create_client_form.html'
     model = Client
-    fields = create_form_fields
+    fields = client_form_fields
     success_url = reverse_lazy('list_clients')
