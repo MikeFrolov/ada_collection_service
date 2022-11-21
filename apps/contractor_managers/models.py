@@ -5,7 +5,7 @@ from apps.core.models import Person
 
 
 class ContractorManager(Person):
-    """Менеджер контрагента(Менеджер організації що надає справу)"""
+    """Manager of the contractor (Manager of the organization providing the case)"""
     class Meta:
         db_table = "сontractor_manager"
         verbose_name = "Менеджер контрагента"

@@ -8,6 +8,24 @@ from apps.core.models import Person
 class Client(Person):
     """Клієнт(Боржник)"""
 
+    # Gender choices
+    class GenderChoices(models.TextChoices):
+        F = 'Жін', 'Жіноча'
+        M = 'Чол', 'Чоловіча'
+        O = 'Інше', 'Інше'
+
+    gender = models.CharField(
+        max_length=4,
+        choices=GenderChoices.choices,
+        verbose_name="Стать"
+    )
+    date_of_birth = models.DateField(
+        auto_now=False,
+        auto_now_add=False,
+        null=True,
+        blank=True,
+        verbose_name="Дата народження"
+    )
     ipn = models.BigIntegerField(null=True, blank=True, unique=True, verbose_name="ІПН")
     passport_serial = models.CharField(
         max_length=2,
@@ -84,3 +102,32 @@ class ClientSocialNetworks(models.Model):
 
     def __str__(self):
         return f"Соціальні мережі клієтна: {self.client}"
+
+
+class ClientContactPerson(Person):
+    """Persons related to the client (relatives, acquaintances, guarantors)"""
+    client = models.ForeignKey(
+        Client,
+        on_delete=models.RESTRICT,
+        verbose_name="Клієнт"
+    )
+
+    # Relations with client
+    class RelationChoices(models.TextChoices):
+        CR = "Close relatives", "Близькі родичі"
+        DR = "Distant relatives", "Далекі родичі"
+        FR = "Friends", "Друзі"
+        CL = "Colleagues", "Колеги"
+        NG = "Neighbors", "Сусіди"
+
+    relations = models.CharField(max_length=17, choices=RelationChoices.choices, verbose_name='Тип звязку')
+    priority = models.BooleanField(default=False, verbose_name='Основний контакт')
+
+    class Meta:
+        db_table = "clients_contacts_persons"
+        verbose_name = "Додатковий контакт клієнта"
+        verbose_name_plural = "Додаткові контакти клієнтів"
+        unique_together = (('client', 'last_name', 'first_name', 'patronymic'),)
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name} {self.patronymic}"
