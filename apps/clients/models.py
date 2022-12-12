@@ -114,19 +114,21 @@ class ClientContactPerson(Person):
 
     # Relations with client
     class RelationChoices(models.TextChoices):
-        CR = "Close relatives", "Близькі родичі"
-        DR = "Distant relatives", "Далекі родичі"
-        FR = "Friends", "Друзі"
-        CL = "Colleagues", "Колеги"
-        NG = "Neighbors", "Сусіди"
+        CR = "Близькі родичі", "Близькі родичі"
+        DR = "Далекі родичі", ""
+        FR = "Друзі", "Друзі"
+        CL = "Коллеги", "Коллеги"
+        NG = "Сусіди", "Сусіди"
+        GR = "Поручитель", "Поручитель"
+        MR = "Заставодавець", "Заставодавець"
 
-    relations = models.CharField(max_length=17, choices=RelationChoices.choices, verbose_name='Тип звязку')
+    relations = models.CharField(max_length=14, choices=RelationChoices.choices, verbose_name='Тип звязку')
     priority = models.BooleanField(default=False, verbose_name='Основний контакт')
 
     class Meta:
         db_table = "clients_contacts_persons"
-        verbose_name = "Додатковий контакт клієнта"
-        verbose_name_plural = "Додаткові контакти клієнтів"
+        verbose_name = "Повязана особа"
+        verbose_name_plural = "Повязані особи"
         unique_together = (('client', 'last_name', 'first_name', 'patronymic'),)
 
     def __str__(self):

@@ -82,7 +82,7 @@ class ClientAddress(Address):
         unique_together = (('person', 'type_address'),)
 
     def __str__(self):
-        return f"{self.country}, {self.index}, {self.province} обл., {self.district} р-н., {self.type_city}" \
+        return f"{self.index}, {self.country}, {self.province} обл., {self.district} р-н., {self.type_city}" \
                f"{self.city}, {self.type_street} {self.street}, буд. {self.house}," \
                f" {self.apartment_type}{self.apartment_number}"
 

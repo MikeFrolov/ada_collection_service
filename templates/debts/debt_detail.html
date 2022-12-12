@@ -1,215 +1,874 @@
 {% extends "base_v1.html" %}
-    {% block title %}
-        Справа № {{ debt.id }}
-    {% endblock %}
-    {% block css %}
-        <!--<link href="../static/debts/css/debts_detail_style.css" rel="stylesheet">-->
-    {% endblock %}
-    {% block page_title %}
-    <div class="container">
-        <br>
-        <div class="card">
-            <div class="card-header text-center opacity-75">
-                  <h4>Справа №: {{ debt.id|safe }}</h4>
+{% block title %}
+    Справа № {{ debt.id }}
+{% endblock %}
+{% block css %}
+    <!--<link href="../static/debts/css/debts_detail_style.css" rel="stylesheet">-->
+{% endblock %}
+{% block page_title %}
+<!-- ==== Page title block ==== -->
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header opacity-75">
+            <div class="row">
+                <div class="col-lg-4"><h5><b>{{ debt.client|safe }}</b></h5></div>
+                <div class="col-lg-3"></div>
+                <div class="col-lg-3"></div>
+                <div class="col-lg-2"><h5><b>#{{ debt.origin_number }}</b></h5></div>
             </div>
         </div>
     </div>
-    {% endblock %}
-    {% block content %}
-    <div class="container">
-        <!-- ==== NAVBAR block with inner tabs ==== -->
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-            <a class="nav-link active" data-bs-toggle="tab" href="#client">Клієнт</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#debt">Договір</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#communication">Коммунікація</a>
-            </li>
-        </ul>
-        <!-- ==== TAB panes  with content ==== -->
-        <div class="tab-content">
-            <!-- ==== TAB Client ==== -->
-            <div class="tab-pane active" id="client">
-                <h4 class="text-center p-3 text-uppercase">{{ debt.client|safe }}</h4>
-                <div class="row g-2">
-                    <div class="col-7 p-2">
-                        <table class="table p-1">
-                          <thead>
-                            <tr><h5 class=" p-2 text-center bg-light">Дані клієнта</h5></tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td colspan="2">ІПН:</td>
-                              <td>{{ debt.client.ipn|safe }}</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Паспорт:</td>
-                              <td>{{ debt.client.passport_serial }} {{ debt.client.passport_number }}</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Дата народження:</td>
-                              <td>{{ debt.client.date_of_birth|safe }}</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Вік:</td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Стать:</td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Роботодавець:</td>
-                              <td>{{ debt.client.employer|safe }}</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Посада:</td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Юр. адреса:</td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Фіз. адреса:</td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Роб. адреса:</td>
-                              <td></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                    </div>
-                    <div class="col-5 p-2">
-                        <table class="table p-1">
-                          <thead>
-                            <tr><h5 class=" p-2 text-center bg-light">Статуси</h5></tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td colspan="2">Військовий:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Тимчасово переміщений:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Віїхав за кордон:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Під окупацією:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Закредитований:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Банкрот:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Тюрма:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Хвороба:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Смерть:</td>
-                              <td>Так/Ні</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                    </div>
-                    <div class="col-7 p-2">
-                        <table class="table p-1">
-                          <thead>
-                            <tr><h5 class=" p-2 text-center bg-light">Соціальні мережі</h5></tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td colspan="2">Facebook:</td>
-                              <td>Посилання</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">LinkedIn:</td>
-                              <td>Посилання</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Instagram:</td>
-                              <td>Посилання</td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Twitter:</td>
-                              <td>Посилання</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                    </div>
-                    <div class="col-5 p-2">
+</div>
+<!-- END page title block -->
+{% endblock %}
+{% block content %}
+<!--  Icons JS-->
+<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+<!-- ==== Content block ==== -->
+<div class="container lh-1">
+    <!-- ==== NAVBAR block with inner tabs ==== -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#client"><b>Клієнт</b></a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#debt"><b>Договір</b></a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#contacts"><b>Контакти</b></a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#communication"><b>Коммунікація</b></a>
+        </li>
+    </ul>
+    <!-- ==== TAB panes  with content ==== -->
+    <div class="tab-content">
+        <!-- ==== TAB Client ==== -->
+        <div class="tab-pane active" id="client">
+            <div class="row g-2">
+                <!-- ==== Client data ==== -->
+                <div class="col-lg-4">
+                    <table class="table p-1">
+                      <thead>
+                        <tr>
+                            <h5 class="p-1 text-center bg-light">
+                                <div class="row g-2">
+                                    <div class="col-lg-11">Дані клієнта</div>
+                                    <div class="col-lg-1">
+                                        <small>
+                                            <a href="#">
+                                                <iconify-icon icon="clarity:edit-line"></iconify-icon>
+                                            </a>
+                                        </small>
+                                    </div>
+                                </div>
+                            </h5>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td colspan="2"><b>ІПН:</b></td>
+                          <td class="text-end"><i>{{ debt.client.ipn|stringformat:"010d" }}</i></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Паспорт:</b></td>
+                          <td class="text-end"><i>{{ debt.client.passport_serial }} {{ debt.client.passport_number|stringformat:"06d" }}</i></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Дата народження:</b></td>
+                          <td class="text-end"><i>{{ debt.client.date_of_birth|date:"d.m.Y" }}</i></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Вік:</b></td>
+                          <td class="text-end"><i>{{ client_age }}</i></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Стать:</b></td>
+                          <td class="text-end"><i>{{ debt.client.gender|safe }}</i></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Роботодавець:</b></td>
+                          <td class="text-end"><i>{{ debt.client.employer|safe }}</i></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Посада:</b></td>
+                          <td class="text-end"><i>{{ debt.client.position|safe }}</i></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <!-- ==== Statuses ==== -->
+                <div class="col-lg-4">
+                    <table class="table p-1">
+                      <thead>
+                        <tr>
+                            <h5 class="p-1 text-center bg-light">
+                                <div class="row g-2">
+                                    <div class="col-lg-11">
+                                        Статуси
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <small>
+                                            <a href="#">
+                                                <iconify-icon icon="clarity:edit-line"></iconify-icon>
+                                            </a>
+                                        </small>
+                                    </div>
+                                </div>
+                            </h5>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td colspan="2"><b>Військовий:</b></td>
+                            <!-- ==== Military status ==== -->
+                            <td>
+                                <i>
+                                    {% if client_statuses.military == True %}
+                                        <b>Так</b>
+                                    {% elif client_statuses.military == False %}
+                                        Ні
+                                    {% endif %}
+                                </i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Тимчасово переміщений:</b></td>
+                          <!-- ==== Displaced status ==== -->
+                          <td>
+                              <i>
+                                {% if client_statuses.displaced == True %}
+                                    <b>Так</b>
+                                {% elif client_statuses.displaced == False %}
+                                    Ні
+                                {% endif %}
+                              </i>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Виїхав за кордон:</b></td>
+                          <!-- ==== Abroad status ==== -->
+                          <td>
+                            {% if client_statuses.abroad == True %}
+                                <b><i>Так</i></b>
+                            {% elif client_statuses.abroad == False %}
+                                <i>Ні</i>
+                            {% endif %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Під окупацією:</b></td>
+                          <!-- ==== Occupation status ==== -->
+                          <td>
+                            {% if client_statuses.occupation == True %}
+                                <b><i>Так</i></b>
+                            {% elif client_statuses.occupation == False %}
+                                <i>Ні</i>
+                            {% endif %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Закредитований:</b></td>
+                          <!-- ==== Credited status ==== -->
+                          <td>
+                            {% if client_statuses.credited == True %}
+                                <b><i>Так</i></b>
+                            {% elif client_statuses.credited == False %}
+                                <i>Ні</i>
+                            {% endif %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Банкрот:</b></td>
+                          <!-- ==== Bankrupt status ==== -->
+                          <td>
+                            {% if client_statuses.bankrupt == True %}
+                                <b><i>Так</i></b>
+                            {% elif client_statuses.bankrupt == False %}
+                                <i>Ні</i>
+                            {% endif %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Тюрма:</b></td>
+                          <!-- ==== Imprisoned status ==== -->
+                          <td>
+                            {% if client_statuses.imprisoned == True %}
+                                <b><i>Так</i></b>
+                            {% elif client_statuses.imprisoned == False %}
+                                <i>Ні</i>
+                            {% endif %}
+                          </td>
+                        </tr>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Хвороба:</b></td>
+                          <!-- ==== Illness status ==== -->
+                          <td>
+                            {% if client_statuses.illness == True %}
+                                <b><i>Так</i></b>
+                            {% elif client_statuses.illness == False %}
+                                <i>Ні</i>
+                            {% endif %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Смерть:</b></td>
+                          <!-- ==== Death status ==== -->
+                          <td>
+                              <i>
+                                {% if client_statuses.death == True %}
+                                    <b>Так</b>
+                                {% elif client_statuses.death == False %}
+                                    Ні
+                                {% endif %}
+                              </i>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <!-- ==== Other debts ==== -->
+                <div class="col-lg-4">
+                    <!-- ==== Other debts ==== -->
+                    <div class="col-lg-12">
                       <table class="table p-1">
                           <thead>
-                            <tr><h5 class=" p-2 text-center bg-light">Інші справи</h5></tr>
+                            <tr><h5 class="p-1 text-center bg-light">Інші справи</h5></tr>
                           </thead>
                           <tbody>
                             <tr>
-                              <td colspan="2">Кількість справ в системі:</td>
-                              <td>Написати ф-цію</td>
+                              <td colspan="2"><b>Кількість справ в системі:</b></td>
+                              <td>
+                                {{ debt.client.debt_set.all.count }}
+                              </td>
                             </tr>
                             <tr>
-                              <td colspan="2">Кількість виконавчих впроваджень:</td>
-                              <td>Написати ф-цію</td>
+                              <td colspan="2"><b>Кількість виконавчих впроваджень:</b></td>
+                              <td>4</td>
                             </tr>
                           </tbody>
                       </table>
                     </div>
-                    <div class="col-12 p-2">
-                        <hr>
-                        <p><h4 class="text-center">Коментарі</h4></p>
-                        <table class="table p-1 border">
-                          <thead class="p-2 text-center bg-light">
+                </div>
+                <!-- ==== Comments ==== -->
+                <div class="col-lg-12">
+                    <table class="table border">
+                      <thead class="text-center bg-light">
+                        <tr>
+                            <th><h6 class="col">Дата:</h6></th>
+                            <th><h6 class="col">Зв'язок через:</h6></th>
+                            <th><h6 class="col">Обіцянка:</h6></th>
+                            <th><h6 class="col text-center">Коментар:</h6></th>
+                      </thead>
+                      <tbody>
+                        <tr class="border">
+                            <td class="col-1 border">14.10.2022 14:02:43</td>
+                            <td class="col-2 border">Тел.дзвінок</td>
+                            <td class="col-2 border">Передадуть інформацію</td>
+                            <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
+                        </tr>
+                        <tr class="border">
+                            <td class="col-1 border">01.09.2022 10:28:23</td>
+                            <td class="col-2 border">Viber</td>
+                            <td class="col-2 border">Обіцянка оплати</td>
+                            <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
+                        </tr>
+                        <tr class="border">
+                            <td class="col-1 border">24.08.2022 17:21:33</td>
+                            <td class="col-2 border">Тел.дзвінок</td>
+                            <td class="col-2 border">Зайнятий</td>
+                            <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <!-- END Comments -->
+            </div>
+        </div>
+        <!-- ==== TAB Debt ==== -->
+        <div class="tab-pane" id="debt">
+            <div class="row g-2">
+                <!-- ==== First block with data on debt ==== -->
+                <div class="col-lg-6">
+                    <table class="table p-1">
+                      <thead>
+                        <tr>
+                            <h5 class="p-1 text-center bg-light">Заключення</h5>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td colspan="2"><b>№ договору в базі:</b></td>
+                          <td class="text-end"><i>{{ debt.id|stringformat:"07d" }}</i></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>№ договору в базі контрагента:</b></td>
+                          <td class="text-end"><i>{{ debt.number_from_contractor|safe }}</i></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Тип договору:</b></td>
+                          <td class="text-end"><i>{{ debt.debt_type|safe }}</i></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Дата заключення договору:</b></td>
+                          <td class="text-end"><i>{{ debt.date_of_creation|date:"d.m.Y" }}</i></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Дата закінчення договору:</b></td>
+                          <td class="text-end"><i>{{ debt.end_date|date:"d.m.Y" }}</i></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Компанія що видала кредит:</b></td>
+                            <td class="text-end"><i>{{ debt.credit_company|safe }}</i></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Бренд під яким видано кредит:</b></td>
+                            <td class="text-end"><i>{{ debt.credit_brand|safe }}</i></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Назва контрагента:</b></td>
+                            <td class="text-end"><i>{{ debt.title_contractor|safe }}</i></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Початкова сума виданих коштів:</b></td>
+                            <td class="text-end"><i>{{ debt.initial_amount|safe }}</i></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Загальна сума виданих коштів:</b></td>
+                            <td class="text-end"><i>{{ debt.total_issued_amount|safe }}</i></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Валюта:</b></td>
+                            <td class="text-end"><i>{{ debt.currency|safe }}</i></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Дата виникнення просрочки:</b></td>
+                            <td class="text-end"><i>{{ debt.delay_date|date:"d.m.Y" }}</i></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Кількість днів просрочки:</b></td>
+                            <td class="text-end"><i>{{ delay_days }}</i></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <!-- ==== Second and third block with data on debt ==== -->
+                <div class="col-lg-6">
+                    <!-- ==== Second block with data on debt ==== -->
+                    <div class="col-lg-12">
+                        <table class="table p-1">
+                          <thead>
                             <tr>
-                                <th><h6 class="col">Дата:</h6></th>
-                                <th><h6 class="col">Звязок через:</h6></th>
-                                <th><h6 class="col">Обіцянка:</h6></th>
-                                <th><h6 class="col text-center">Коментар:</h6></th>
+                                <h5 class="p-1 text-center bg-light">Структура боргу</h5>
+                            </tr>
                           </thead>
                           <tbody>
-                            <tr class="border">
-                                <td class="col-1 border">2022-10-14</td>
-                                <td class="col-2 border">Тел.дзвінок</td>
-                                <td class="col-2 border">Передадуть інформацію</td>
-                                <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
+                            <tr>
+                              <td colspan="2"><b>Сума основного боргу за кредитом:</b></td>
+                              <td class="text-end"><i>{{ debt.principal|safe }}</i></td>
                             </tr>
-                            <tr class="border">
-                                <td class="col-1 border">2022-09-01</td>
-                                <td class="col-2 border">Viber</td>
-                                <td class="col-2 border">Обіцянка оплати</td>
-                                <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
+                            <tr>
+                              <td colspan="2"><b>Комісії:</b></td>
+                              <td class="text-end"><i>{{ debt.commission|safe }}</i></td>
                             </tr>
-                            <tr class="border">
-                                <td class="col-1 border">2022-08-24</td>
-                                <td class="col-2 border">Тел.дзвінок</td>
-                                <td class="col-2 border">Зайнятий</td>
-                                <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
+                            <tr>
+                              <td colspan="2"><b>Відсотки:</b></td>
+                              <td class="text-end"><i>{{ debt.interest|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Пеня:</b></td>
+                              <td class="text-end"><i>{{ debt.penalty|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Штрафи:</b></td>
+                              <td class="text-end"><i>{{ debt.fines|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Поточний борг:</b></td>
+                              <td class="text-end"><i>{{ debt.current_debt|safe }}</i></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                    <!-- ==== The third block with data on debt ==== -->
+                    <div class="col-lg-12">
+                        <table class="table p-1">
+                          <thead>
+                            <tr>
+                                <h5 class="p-1 text-center bg-light">Інформація по платежам</h5>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td colspan="2"><b>Сума щомісячного платежу:</b></td>
+                              <td class="text-end"><i>{{ debt.monthly_payment_amount|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Кількість платежів:</b></td>
+                              <td class="text-end"><i>{{ debt.payment_amounts|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Кількість прострочених платежів:</b></td>
+                              <td class="text-end"><i>{{ debt.number_of_late_payments|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Загальна сума оплачених коштів:</b></td>
+                              <td class="text-end"><i>{{ debt.amount_of_payments|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Загальна сума продовжень:</b></td>
+                              <td class="text-end"><i>{{ debt.total_prolongation_amount|safe }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Дата останнього платежу:</b></td>
+                              <td class="text-end"><i>{{ debt.last_payment_date|date:"d.m.Y" }}</i></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><b>Сума останнього платежу:</b></td>
+                              <td class="text-end"><i>{{ debt.last_payment_amount|safe }}</i></td>
                             </tr>
                           </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <!-- ==== TAB Debt ==== -->
-            <div class="tab-pane" id="debt"><br>Дані по договору/справі</div>
-            <!-- ==== TAB Communication ==== -->
-            <div class="tab-pane" id="communication">Коммунікація з клієнтом.</div>
+        </div>
+        <!-- ==== TAB Contacts ==== -->
+        <div class="tab-pane" id="contacts">
+            <!-- ==== Client phones & Client emails & Client social networks ==== -->
+            <div class="row g-2">
+                <!-- Client phones -->
+                <div class="col-lg-4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <h5 class="p-1 text-center bg-light">
+                                    <div class="row g-2">
+                                        <div class="col-lg-11">Номери телефону</div>
+                                        <div class="col-lg-1"><a href="#"><iconify-icon icon="ic:baseline-plus" style="color: green;" rotate="180deg"></iconify-icon></a></div>
+                                    </div>
+                                </h5>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for phone in client_phones %}
+                                <tr>
+                                    <!-- Phone type -->
+                                    <td class="col-lg-2"><b>{{ phone.type_phone|safe }}</b></td>
+                                    <!-- Phone field -->
+                                    <td class="col-lg-4"><i>{{ phone.phone|safe }}</i></td>
+                                    <!-- Messengers -->
+                                    <td class="col-lg-4">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <!-- Facetime -->
+                                                    <td>
+                                                        {% if phone.facetime == True %}
+                                                            <a href="#" title="Facetime">
+                                                                <iconify-icon icon="icon-park-solid:facetime"></iconify-icon>
+                                                            </a>
+                                                        {% endif %}
+                                                    </td>
+                                                    <!-- Signal -->
+                                                    <td>
+                                                        {% if phone.signal == True %}
+                                                            <a href="#" title="Signal">
+                                                                <iconify-icon icon="icon-park:message-sent"></iconify-icon>
+                                                            </a>
+                                                        {% endif %}
+                                                    </td>
+                                                    <!-- Telegram -->
+                                                    <td>
+                                                        {% if phone.telegram == True %}
+                                                            <a href="#" title="Telegram">
+                                                                <iconify-icon icon="logos:telegram"></iconify-icon>
+                                                            </a>
+                                                        {% endif %}
+                                                    </td>
+                                                    <!-- Viber -->
+                                                    <td>
+                                                        {% if phone.viber == True %}
+                                                            <a href="#" title="Viber">
+                                                                <iconify-icon icon="fa-brands:viber"></iconify-icon>
+                                                            </a>
+                                                        {% endif %}
+                                                    </td>
+                                                    <!-- WhatsApp -->
+                                                    <td>
+                                                        {% if phone.whatsapp == True %}
+                                                            <a href="#" title="WhatsApp">
+                                                                <iconify-icon icon="logos:whatsapp-icon"></iconify-icon>
+                                                            </a>
+                                                        {% endif %}
+                                                    </td>
+                                                    <!-- OLX -->
+                                                    <td>
+                                                        {% if phone.olx == True %}
+                                                            <a href="#" title="OLX">
+                                                                <iconify-icon icon="arcticons:olxro"></iconify-icon>
+                                                            </a>
+                                                        {% endif %}
+                                                    </td>
+                                                    <!-- Prom.ua -->
+                                                    <td>
+                                                        {% if phone.prom == True %}
+                                                            <a href="#" title="Prom.ua">
+                                                                <iconify-icon icon="ic:twotone-square" style="color: purple;"></iconify-icon>
+                                                            </a>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <!-- Phone verification -->
+                                    <td class="col-lg-1">
+                                        {% if phone.verification == "YES" %}
+                                            <iconify-icon inline icon="mdi:done-outline" style="color: green;"></iconify-icon>
+                                        {% elif phone.verification == "NOT" %}
+                                            <iconify-icon inline icon="mdi:done-outline" style="color: red;"></iconify-icon>
+                                        {% endif %}
+                                    </td>
+                                    <!-- Edit phone -->
+                                    <td class="col-lg-1">
+                                        <a href="#"><iconify-icon icon="clarity:edit-line"></iconify-icon></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Client emails -->
+                <div class="col-lg-4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <h5 class="p-1 text-center bg-light">
+                                    <div class="row g-2">
+                                        <div class="col-lg-11">Електронні пошти</div>
+                                        <div class="col-lg-1"><a href="#"><iconify-icon icon="ic:baseline-plus" style="color: green;" rotate="180deg"></iconify-icon></a></div>
+                                    </div>
+                                </h5>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for email in client_emails %}
+                                <tr>
+                                    <!-- Email field -->
+                                    <td class="col-lg-10"><b><i>{{ email.email|safe }}</i></b></td>
+                                    <!-- Phone verification -->
+                                    <td class="col-lg-1">
+                                        {% if email.verification == "YES" %}
+                                            <iconify-icon inline icon="mdi:done-outline" style="color: green;"></iconify-icon>
+                                        {% elif email.verification == "NOT" %}
+                                            <iconify-icon inline icon="mdi:done-outline" style="color: red;"></iconify-icon>
+                                        {% endif %}
+                                    </td>
+                                    <!-- Edit email -->
+                                    <td class="col-lg-1">
+                                        <a href="#"><iconify-icon icon="clarity:edit-line"></iconify-icon></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Client social networks -->
+                <div class="col-lg-4">
+                    <table class="table p-1">
+                      <thead>
+                        <tr>
+                            <h5 class="p-1 text-center bg-light">
+                                <div class="row g-2">
+                                    <div class="col-lg-11">Соціальні мережі</div>
+                                    <div class="col-lg-1">
+                                        <small>
+                                            <a href="#">
+                                                <iconify-icon icon="clarity:edit-line"></iconify-icon>
+                                            </a>
+                                        </small>
+                                    </div>
+                                </div>
+                            </h5>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td colspan="2"><b>Facebook:</b></td>
+                          <td>
+                              {% if client_networks.facebook %}
+                                <a href="{{ client_networks.facebook }}" class="btn-link" target="_blank">
+                                    Перейти
+                                </a>
+                              {% endif %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>LinkedIn:</b></td>
+                          <td>
+                              {% if client_networks.linkedin %}
+                                <a href="{{ client_networks.linkedin }}" class="btn-link" target="_blank">
+                                    Перейти
+                                </a>
+                              {% endif %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Instagram:</b></td>
+                          <td>
+                              {% if client_networks.instagram %}
+                                <a href="{{ client_networks.instagram }}" class="btn-link" target="_blank">
+                                    Перейти
+                                </a>
+                              {% endif %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Tik Tok:</b></td>
+                          <td>
+                              {% if client_networks.tictok %}
+                                <a href="{{ client_networks.tictok }}" class="btn-link" target="_blank">
+                                    Перейти
+                                </a>
+                              {% endif %}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <!-- ==== Client addresses ==== -->
+                <table class="table">
+                        <thead>
+                            <tr>
+                                <h5 class="p-1 text-center bg-light">
+                                    <div class="row g-1">
+                                        <div class="col-lg-11">Адреси клієнта</div>
+                                        <div class="col-lg-1"><a href="#"><iconify-icon icon="ic:baseline-plus" style="color: green;" rotate="180deg"></iconify-icon></a></div>
+                                    </div>
+                                </h5>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for address in client_addresses %}
+                            <tr>
+                                <!-- Address type -->
+                                <td class="col-lg-1">
+                                    {% if address.type_address == "Legal address" %}
+                                    <b>Адр.реєстрації:</b>
+                                    {% elif address.type_address == "Physical address"%}
+                                    <b>Адр.проживання:</b>
+                                    {% elif address.type_address == "Work address"%}
+                                    <b>Роб.адреса:</b>
+                                    {% elif address.type_address == "Company address"%}
+                                    <b>Адр.компанії клієнта:</b>
+                                    {% endif %}
+                                </td>
+                                <!-- Address -->
+                                <td class="col-lg-9 text-start"><i>{{ address }}</i></td>
+                                <!-- Address verification -->
+                                <td class="col-lg-1 text-end">
+                                    <iconify-icon inline icon="mdi:done-outline" style="color: green;"></iconify-icon>
+                                </td>
+                                <!-- Edit address -->
+                                <td class="col-lg-1 text-end">
+                                    <a href="#"><iconify-icon icon="clarity:edit-line"></iconify-icon></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                <!-- ==== Client contact persons==== -->
+                <div class="col-lg-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <h5 class="p-1 text-center bg-light">
+                                    <div class="row g-1">
+                                        <div class="col-lg-11">Повязані особи</div>
+                                        <div class="col-lg-1"><a href="#"><iconify-icon icon="ic:baseline-plus" style="color: green;" rotate="180deg"></iconify-icon></a></div>
+                                    </div>
+                                </h5>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="row g-2">
+                        {% for person in client_contact_persons %}
+                            <!-- Client contact person card -->
+                            <div class="col-lg-4">
+                                <div class="card mb-3">
+                                    <! -- Contact person Full name-- >
+                                    <div class="card-header text-center">
+                                        <div class="row">
+                                            <!-- <div class="col-lg-1">
+                                                {% if person.priority == True %}
+                                                    <iconify-icon icon="material-symbols:arrow-selector-tool-outline-rounded" style="color: green;" rotate="180deg"></iconify-icon>
+                                                {% endif %}
+                                            </div> -->
+                                            <div class="col-lg-11 text-start">
+                                                <b>{{ person }} </b>
+                                                <small class="text-muted">{{ person.relations }}</small>
+                                            </div>
+                                            <div class="col-lg-1">
+                                                <a href="#"><iconify-icon icon="clarity:edit-line"></iconify-icon></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <! -- Phones & emails -- >
+                                    <div class="card-body">
+                                        <!-- Phones -->
+                                        <table class="table">
+                                            <thead>
+                                                <div class="row g-1">
+                                                    <div class="col-lg-11">Телефони:</div>
+                                                    <div class="col-lg-1">
+                                                        <a href="#"><iconify-icon icon="ic:baseline-plus" style="color: green;" rotate="180deg"></iconify-icon></a>
+                                                    </div>
+                                                    <hr>
+                                                </div>
+                                            </thead>
+                                            <tbody>
+                                                {% for contact_person_phones in client_contact_persons_phones %}
+                                                    {% for phone in  contact_person_phones %}
+                                                        {% if phone.contact_person_id == person.id %}
+                                                            <tr>
+                                                                <!-- Phone type -->
+                                                                <td class="col-lg-2"><b>{{ phone.type_phone|safe }}</b></td>
+                                                                <!-- Phone field -->
+                                                                <td class="col-lg-4"><i>{{ phone.phone|safe }}</i></td>
+                                                                <!-- Messengers -->
+                                                                <td class="col-lg-4">
+                                                                    <table>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <!-- Facetime -->
+                                                                                <td>
+                                                                                    {% if phone.facetime == True %}
+                                                                                        <a href="#" title="Facetime">
+                                                                                            <iconify-icon icon="icon-park-solid:facetime"></iconify-icon>
+                                                                                        </a>
+                                                                                    {% endif %}
+                                                                                </td>
+                                                                                <!-- Signal -->
+                                                                                <td>
+                                                                                    {% if phone.signal == True %}
+                                                                                        <a href="#" title="Signal">
+                                                                                            <iconify-icon icon="icon-park:message-sent"></iconify-icon>
+                                                                                        </a>
+                                                                                    {% endif %}
+                                                                                </td>
+                                                                                <!-- Telegram -->
+                                                                                <td>
+                                                                                    {% if phone.telegram == True %}
+                                                                                        <a href="#" title="Telegram">
+                                                                                            <iconify-icon icon="logos:telegram"></iconify-icon>
+                                                                                        </a>
+                                                                                    {% endif %}
+                                                                                </td>
+                                                                                <!-- Viber -->
+                                                                                <td>
+                                                                                    {% if phone.viber == True %}
+                                                                                        <a href="#" title="Viber">
+                                                                                            <iconify-icon icon="fa-brands:viber"></iconify-icon>
+                                                                                        </a>
+                                                                                    {% endif %}
+                                                                                </td>
+                                                                                <!-- WhatsApp -->
+                                                                                <td>
+                                                                                    {% if phone.whatsapp == True %}
+                                                                                        <a href="#" title="WhatsApp">
+                                                                                            <iconify-icon icon="logos:whatsapp-icon"></iconify-icon>
+                                                                                        </a>
+                                                                                    {% endif %}
+                                                                                </td>
+                                                                                <!-- OLX -->
+                                                                                <td>
+                                                                                    {% if phone.olx == True %}
+                                                                                        <a href="#" title="OLX">
+                                                                                            <iconify-icon icon="arcticons:olxro"></iconify-icon>
+                                                                                        </a>
+                                                                                    {% endif %}
+                                                                                </td>
+                                                                                <!-- Prom.ua -->
+                                                                                <td>
+                                                                                    {% if phone.prom == True %}
+                                                                                        <a href="#" title="Prom.ua">
+                                                                                            <iconify-icon icon="ic:twotone-square" style="color: purple;"></iconify-icon>
+                                                                                        </a>
+                                                                                    {% endif %}
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                                <!-- Phone verification -->
+                                                                <td class="col-lg-1">
+                                                                    {% if phone.verification == "YES" %}
+                                                                        <iconify-icon inline icon="mdi:done-outline" style="color: green;"></iconify-icon>
+                                                                    {% elif phone.verification == "NOT" %}
+                                                                        <iconify-icon inline icon="mdi:done-outline" style="color: red;"></iconify-icon>
+                                                                    {% endif %}
+                                                                </td>
+                                                                <!-- Edit phone -->
+                                                                <td class="col-lg-1">
+                                                                    <a href="#"><iconify-icon icon="clarity:edit-line"></iconify-icon></a>
+                                                                </td>
+                                                            </tr>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        <!-- Emails -->
+                                        <table class="table">
+                                            <thead>
+                                                <div class="row g-1">
+                                                    <div class="col-lg-11">Електронні пошти:</div>
+                                                    <div class="col-lg-1">
+                                                        <a href="#"><iconify-icon icon="ic:baseline-plus" style="color: green;" rotate="180deg"></iconify-icon></a>
+                                                    </div>
+                                                    <hr>
+                                                </div>
+                                            </thead>
+                                            <tbody>
+                                                {% for contact_person_emails in client_contact_persons_emails %}
+                                                    {% for email in contact_person_emails %}
+                                                        {% if email.contact_person_id == person.id %}
+                                                            <tr>
+                                                                <!-- Email field -->
+                                                                <td class="col-lg-10"><b><i>{{ email.email|safe }}</i></b></td>
+                                                                <!-- Phone verification -->
+                                                                <td class="col-lg-1">
+                                                                    {% if email.verification == "YES" %}
+                                                                        <iconify-icon inline icon="mdi:done-outline" style="color: green;"></iconify-icon>
+                                                                    {% elif email.verification == "NOT" %}
+                                                                        <iconify-icon inline icon="mdi:done-outline" style="color: red;"></iconify-icon>
+                                                                    {% endif %}
+                                                                </td>
+                                                                <td class="col-lg-1">
+                                                                    <a href="#"><iconify-icon icon="clarity:edit-line"></iconify-icon></a>
+                                                                </td>
+                                                            </tr>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ==== TAB Communication ==== -->
+        <div class="tab-pane" id="communication">
+
         </div>
     </div>
-    {% endblock %}
+</div>
+<!-- END content block -->
+{% endblock %}

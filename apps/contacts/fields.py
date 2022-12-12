@@ -1,28 +1,33 @@
-create_phone_fields = [
-                    'client',
+base_phone_fields = [
                     'phone',
                     'type_phone',
-                    'verification',
                     'facetime',
                     'signal',
                     'telegram',
                     'viber',
-                    'whatsapp'
+                    'whatsapp',
+                    'olx',
+                    'prom',
+                    'verification'
                     ]
-
-create_email_fields = [
+client_phone_fields = [
     'client',
-    'email'
-]
+    *base_phone_fields
+    ]
 
 client_contact_person_phone_field = [
-    'сontact_person',
-    'phone',
-    'type_phone',
-    'verification',
-    'facetime',
-    'signal',
-    'telegram',
-    'viber',
-    'whatsapp'
+    'contact_person',
+    *base_phone_fields
+]
+
+client_email_fields = [
+    'client',
+    'email',
+    'verification'
+]
+
+contact_person_email_fields = [
+    'contact_person',
+    'email',
+    'verification'
 ]
