@@ -30,7 +30,7 @@ class ClientSocialNetworksAdmin(admin.ModelAdmin):
 @admin.register(ClientContactPerson)
 class ClientContactPersonAdmin(admin.ModelAdmin):
     fields = client_contact_person_fields
-    list_display = ("id", "last_name", "first_name", "patronymic", "client")
+    list_display = ("id", "last_name", "first_name", "patronymic", "client", "relations")
     list_per_page = 20
     list_filter = ("last_name", "first_name", "patronymic", "client")
-    search_fields = ("last_name__startswith", "first_name__startswith", "patronymic__startswith", "client__startswith")
+    search_fields = ("last_name__startswith", "first_name__startswith", "patronymic__startswith")

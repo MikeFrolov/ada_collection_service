@@ -40,6 +40,7 @@ ROOT_APPS = [
     'apps.contractors',
     'apps.contractor_managers',
     'apps.clients',
+    'apps.contacts',
     'apps.debts',
     'apps.adresses'
 ]

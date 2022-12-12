@@ -23,6 +23,8 @@
 <!-- END page title block -->
 {% endblock %}
 {% block content %}
+<!--  Icons JS-->
+<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <!-- ==== Content block ==== -->
 <div class="container lh-1">
     <!-- ==== NAVBAR block with inner tabs ==== -->
@@ -32,6 +34,9 @@
         </li>
         <li class="nav-item">
         <a class="nav-link" data-bs-toggle="tab" href="#debt"><b>Договір</b></a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#contacts"><b>Контакти</b></a>
         </li>
         <li class="nav-item">
         <a class="nav-link" data-bs-toggle="tab" href="#communication"><b>Коммунікація</b></a>
@@ -50,7 +55,13 @@
                             <h5 class="p-1 text-center bg-light">
                                 <div class="row g-2">
                                     <div class="col-lg-11">Дані клієнта</div>
-                                    <div class="col-lg-1"><small>Edit</small></div>
+                                    <div class="col-lg-1">
+                                        <small>
+                                            <a href="#">
+                                                <iconify-icon icon="clarity:edit-line"></iconify-icon>
+                                            </a>
+                                        </small>
+                                    </div>
                                 </div>
                             </h5>
                         </tr>
@@ -84,22 +95,6 @@
                           <td colspan="2"><b>Посада:</b></td>
                           <td class="text-end"><i>{{ debt.client.position|safe }}</i></td>
                         </tr>
-                        {% for address in client_addresses %}
-                            <tr>
-                                <td colspan="2">
-                                    {% if address.type_address == "Legal address" %}
-                                    <b>Адр.реєстрації:</b>
-                                    {% elif address.type_address == "Physical address"%}
-                                    <b>Адр.проживання:</b>
-                                    {% elif address.type_address == "Work address"%}
-                                    <b>Роб.адреса:</b>
-                                    {% elif address.type_address == "Company address"%}
-                                    <b>Адр.компанії клієнта:</b>
-                                    {% endif %}
-                                </td>
-                                <td class="text-end"><i><small>{{ address }}</small></i></td>
-                            </tr>
-                        {% endfor %}
                       </tbody>
                     </table>
                 </div>
@@ -110,8 +105,16 @@
                         <tr>
                             <h5 class="p-1 text-center bg-light">
                                 <div class="row g-2">
-                                    <div class="col-lg-11">Статуси</div>
-                                    <div class="col-lg-1"><small>Edit</small></div>
+                                    <div class="col-lg-11">
+                                        Статуси
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <small>
+                                            <a href="#">
+                                                <iconify-icon icon="clarity:edit-line"></iconify-icon>
+                                            </a>
+                                        </small>
+                                    </div>
                                 </div>
                             </h5>
                         </tr>
@@ -226,65 +229,8 @@
                       </tbody>
                     </table>
                 </div>
-                <!-- ==== Social networks & Other debts ==== -->
+                <!-- ==== Other debts ==== -->
                 <div class="col-lg-4">
-                    <!-- ==== Social networks ==== -->
-                    <div class="col-lg-12">
-                        <table class="table p-1">
-                          <thead>
-                            <tr>
-                                <h5 class="p-1 text-center bg-light">
-                                    <div class="row g-2">
-                                        <div class="col-lg-11">Соціальні мережі</div>
-                                        <div class="col-lg-1"><small>Edit</small></div>
-                                    </div>
-                                </h5>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td colspan="2"><b>Facebook:</b></td>
-                              <td>
-                                  {% if client_networks.facebook %}
-                                    <a href="{{ client_networks.facebook }}" class="btn-link" target="_blank">
-                                        Перейти
-                                    </a>
-                                  {% endif %}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="2"><b>LinkedIn:</b></td>
-                              <td>
-                                  {% if client_networks.linkedin %}
-                                    <a href="{{ client_networks.linkedin }}" class="btn-link" target="_blank">
-                                        Перейти
-                                    </a>
-                                  {% endif %}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="2"><b>Instagram:</b></td>
-                              <td>
-                                  {% if client_networks.instagram %}
-                                    <a href="{{ client_networks.instagram }}" class="btn-link" target="_blank">
-                                        Перейти
-                                    </a>
-                                  {% endif %}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="2"><b>Tik Tok:</b></td>
-                              <td>
-                                  {% if client_networks.tictok %}
-                                    <a href="{{ client_networks.tictok }}" class="btn-link" target="_blank">
-                                        Перейти
-                                    </a>
-                                  {% endif %}
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                    </div>
                     <!-- ==== Other debts ==== -->
                     <div class="col-lg-12">
                       <table class="table p-1">
@@ -487,6 +433,316 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+        <!-- ==== TAB Contacts ==== -->
+        <div class="tab-pane" id="contacts">
+            <div class="row g-2">
+                <!-- ==== Client phones & Client contact persons phones ==== -->
+                <div class="col-lg-12">
+                    <!-- All phones -->
+                    <table class="table">
+                        <! -- Phones table header -- >
+                        <thead>
+                            <tr>
+                                <h5 class="p-1 text-center bg-light">
+                                    <div class="row g-2">
+                                        <div class="col-lg-12">Телефони</div>
+                                    </div>
+                                </h5>
+                            </tr>
+                        </thead>
+                    </table>
+                    <! -- Client Phones -->
+                    <div class="row g-2">
+                        {% for phone in client_phones %}
+                            <div class="card col-lg-6">
+                                <div class="row p-2">
+                                    <!-- Client -->
+                                    <div class="col-lg-4"><i>{{ phone.client|safe }}</i></div>
+                                    <!-- Phone type -->
+                                    <div class="col-lg-1"><b>{{ phone.type_phone|safe }}</b></div>
+                                    <!-- Phone field -->
+                                    <div class="col-lg-3"><i>{{ phone.phone|safe }}</i></div>
+                                    <!-- Messengers -->
+                                    <div class="col-lg-2">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <!-- Facetime -->
+                                                    <td>
+                                                        {% if phone.facetime == True %}
+                                                            <a href="#" title="Facetime">
+                                                                <iconify-icon icon="icon-park-solid:facetime"></iconify-icon>
+                                                            </a>
+                                                        {% endif %}
+                                                    </td>
+                                                    <!-- Signal -->
+                                                    <td>
+                                                        {% if phone.signal == True %}
+                                                            <a href="#" title="Signal">
+                                                                <iconify-icon icon="icon-park:message-sent"></iconify-icon>
+                                                            </a>
+                                                        {% endif %}
+                                                    </td>
+                                                    <!-- Telegram -->
+                                                    <td>
+                                                        {% if phone.telegram == True %}
+                                                            <a href="#" title="Telegram">
+                                                                <iconify-icon icon="logos:telegram"></iconify-icon>
+                                                            </a>
+                                                        {% endif %}
+                                                    </td>
+                                                    <!-- Viber -->
+                                                    <td>
+                                                        {% if phone.viber == True %}
+                                                            <a href="#" title="Viber">
+                                                                <iconify-icon icon="fa-brands:viber"></iconify-icon>
+                                                            </a>
+                                                        {% endif %}
+                                                    </td>
+                                                    <!-- WhatsApp -->
+                                                    <td>
+                                                        {% if phone.whatsapp == True %}
+                                                            <a href="#" title="WhatsApp">
+                                                                <iconify-icon icon="logos:whatsapp-icon"></iconify-icon>
+                                                            </a>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- Phone verification -->
+                                    <div class="col-lg-1">
+                                        {% if phone.verification == "YES" %}
+                                            <iconify-icon inline icon="mdi:done-outline" style="color: green;"></iconify-icon>
+                                        {% elif phone.verification == "NOT" %}
+                                            <iconify-icon inline icon="mdi:done-outline" style="color: red;"></iconify-icon>
+                                        {% endif %}
+                                    </div>
+                                    <!-- Edit phone -->
+                                    <div class="col-lg-1">
+                                        <a href="#"><iconify-icon icon="clarity:edit-line"></iconify-icon></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <! -- Client contact persons phones -->
+                    <hr>
+                    <div class="row g-2">
+                        {% for contact_persons_phones in client_contact_persons_phones %}
+                            {% for phone in contact_persons_phones %}
+                                <div class="card col-lg-6">
+                                    <div class="row p-2">
+                                        <!-- Client -->
+                                        <div class="col-lg-4"><i>{{ phone.contact_person|safe }}</i></div>
+                                        <!-- Phone type -->
+                                        <div class="col-lg-1"><b>{{ phone.type_phone|safe }}</b></div>
+                                        <!-- Phone field -->
+                                        <div class="col-lg-3"><i>{{ phone.phone|safe }}</i></div>
+                                        <!-- Messengers -->
+                                        <div class="col-lg-2">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <!-- Facetime -->
+                                                        <td>
+                                                            {% if phone.facetime == True %}
+                                                                <a href="#" title="Facetime">
+                                                                    <iconify-icon icon="icon-park-solid:facetime"></iconify-icon>
+                                                                </a>
+                                                            {% endif %}
+                                                        </td>
+                                                        <!-- Signal -->
+                                                        <td>
+                                                            {% if phone.signal == True %}
+                                                                <a href="#" title="Signal">
+                                                                    <iconify-icon icon="icon-park:message-sent"></iconify-icon>
+                                                                </a>
+                                                            {% endif %}
+                                                        </td>
+                                                        <!-- Telegram -->
+                                                        <td>
+                                                            {% if phone.telegram == True %}
+                                                                <a href="#" title="Telegram">
+                                                                    <iconify-icon icon="logos:telegram"></iconify-icon>
+                                                                </a>
+                                                            {% endif %}
+                                                        </td>
+                                                        <!-- Viber -->
+                                                        <td>
+                                                            {% if phone.viber == True %}
+                                                                <a href="#" title="Viber">
+                                                                    <iconify-icon icon="fa-brands:viber"></iconify-icon>
+                                                                </a>
+                                                            {% endif %}
+                                                        </td>
+                                                        <!-- WhatsApp -->
+                                                        <td>
+                                                            {% if phone.whatsapp == True %}
+                                                                <a href="#" title="WhatsApp">
+                                                                    <iconify-icon icon="logos:whatsapp-icon"></iconify-icon>
+                                                                </a>
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- Phone verification -->
+                                        <div class="col-lg-1">
+                                            {% if phone.verification == "YES" %}
+                                                <iconify-icon inline icon="mdi:done-outline" style="color: green;"></iconify-icon>
+                                            {% elif phone.verification == "NOT" %}
+                                                <iconify-icon inline icon="mdi:done-outline" style="color: red;"></iconify-icon>
+                                            {% endif %}
+                                        </div>
+                                        <!-- Edit phone -->
+                                        <div class="col-lg-1">
+                                            <a href="#"><iconify-icon icon="clarity:edit-line"></iconify-icon></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <!-- Client emails -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <h5 class="p-1 text-center bg-light">
+                                    <div class="row g-2">
+                                        <div class="col-lg-12">Електронні пошти клієнта</div>
+                                    </div>
+                                </h5>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for email in client_emails %}
+                                <tr>
+                                    <!-- Email field -->
+                                    <td class="col-lg-10"><b><i>{{ email.email|safe }}</i></b></td>
+                                    <!-- Phone verification -->
+                                    <td class="col-lg-1">
+                                        {% if email.verification == "YES" %}
+                                            <iconify-icon inline icon="mdi:done-outline" style="color: green;"></iconify-icon>
+                                        {% elif email.verification == "NOT" %}
+                                            <iconify-icon inline icon="mdi:done-outline" style="color: red;"></iconify-icon>
+                                        {% endif %}
+                                    </td>
+                                    <!-- Edit email -->
+                                    <td class="col-lg-1">
+                                        <a href="#"><iconify-icon icon="clarity:edit-line"></iconify-icon></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- Client social networks -->
+                    <table class="table p-1">
+                      <thead>
+                        <tr>
+                            <h5 class="p-1 text-center bg-light">
+                                <div class="row g-2">
+                                    <div class="col-lg-11">Соціальні мережі</div>
+                                    <div class="col-lg-1">
+                                        <small>
+                                            <a href="#">
+                                                <iconify-icon icon="clarity:edit-line"></iconify-icon>
+                                            </a>
+                                        </small>
+                                    </div>
+                                </div>
+                            </h5>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td colspan="2"><b>Facebook:</b></td>
+                          <td>
+                              {% if client_networks.facebook %}
+                                <a href="{{ client_networks.facebook }}" class="btn-link" target="_blank">
+                                    Перейти
+                                </a>
+                              {% endif %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>LinkedIn:</b></td>
+                          <td>
+                              {% if client_networks.linkedin %}
+                                <a href="{{ client_networks.linkedin }}" class="btn-link" target="_blank">
+                                    Перейти
+                                </a>
+                              {% endif %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Instagram:</b></td>
+                          <td>
+                              {% if client_networks.instagram %}
+                                <a href="{{ client_networks.instagram }}" class="btn-link" target="_blank">
+                                    Перейти
+                                </a>
+                              {% endif %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><b>Tik Tok:</b></td>
+                          <td>
+                              {% if client_networks.tictok %}
+                                <a href="{{ client_networks.tictok }}" class="btn-link" target="_blank">
+                                    Перейти
+                                </a>
+                              {% endif %}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <!-- ==== Client addresses ==== -->
+                <table class="table">
+                        <thead>
+                            <tr>
+                                <h5 class="p-1 text-center bg-light">
+                                    <div class="row g-2">
+                                        <div class="col-lg-12">Адреси клієнта</div>
+                                    </div>
+                                </h5>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for address in client_addresses %}
+                            <tr>
+                                <!-- Address type -->
+                                <td class="col-lg-1">
+                                    {% if address.type_address == "Legal address" %}
+                                    <b>Адр.реєстрації:</b>
+                                    {% elif address.type_address == "Physical address"%}
+                                    <b>Адр.проживання:</b>
+                                    {% elif address.type_address == "Work address"%}
+                                    <b>Роб.адреса:</b>
+                                    {% elif address.type_address == "Company address"%}
+                                    <b>Адр.компанії клієнта:</b>
+                                    {% endif %}
+                                </td>
+                                <!-- Address -->
+                                <td class="col-lg-9 text-end"><i><small>{{ address }}</small></i></td>
+                                <!-- Address verification -->
+                                <td class="col-lg-1 text-end">
+                                    <iconify-icon inline icon="mdi:done-outline" style="color: green;"></iconify-icon>
+                                </td>
+                                <!-- Edit address -->
+                                <td class="col-lg-1 text-end">
+                                    <a href="#"><iconify-icon icon="clarity:edit-line"></iconify-icon></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
             </div>
         </div>
         <!-- ==== TAB Communication ==== -->

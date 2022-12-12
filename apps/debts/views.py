@@ -5,10 +5,12 @@ from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from datetime import date
+import numpy as np
 from .fields import create_form_fields
 from .models import Debt
 from apps.adresses.models import ClientAddress
-from apps.clients.models import Client, ClientStatuses, ClientSocialNetworks
+from apps.clients.models import Client, ClientContactPerson, ClientStatuses, ClientSocialNetworks
+from apps.contacts.models import ClientEmail, ClientContactPersonEmail, ClientContactPersonPhone, ClientPhone
 
 
 def get_age(born_date: date) -> int:
@@ -44,7 +46,7 @@ class CreateDebtFormView(CreateView):  # Fixme: add 'LoginRequiredMixin, ' in fi
 
 class DebtDetailView(DetailView):
     model = Debt
-    template_name = 'debts/debt_detail_v1.html'
+    template_name = 'debts/debt_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(DebtDetailView, self).get_context_data(**kwargs)
@@ -54,6 +56,10 @@ class DebtDetailView(DetailView):
         context['client_age'] = get_age(debt.client.date_of_birth)  # calculate client age from birthdate
 
         context['client_addresses'] = [address for address in ClientAddress.objects.all().filter(person=client.id)]  # get client addresses from db
+
+        context['client_phones'] = [phone for phone in ClientPhone.objects.all().filter(client=client.id)]  # get client phones from db
+
+        context['client_emails'] = [email for email in ClientEmail.objects.all().filter(client=client.id)]  # get client emails from db]
 
         # Get or create ClientStatuses end added him in context
         try:
@@ -72,5 +78,22 @@ class DebtDetailView(DetailView):
         context['client_networks'] = client_networks  # get client social networks from db
 
         context['delay_days'] = calculate_number_of_days(debt.delay_date)
+
+        # Get client contact persons from db
+        client_contact_persons = [person for person in ClientContactPerson.objects.all().filter(client=client.id).order_by('-priority')]
+        context['client_contact_persons'] = client_contact_persons
+
+        # Get client contact persons phones (list - sorted by contact_person_id) from db
+        client_contact_persons_phones = []
+        for person in client_contact_persons:
+            client_contact_persons_phones.append(ClientContactPersonPhone.objects.all().filter(contact_person_id=person.id))
+        context['client_contact_persons_phones'] = client_contact_persons_phones
+
+        # Get client contact persons emails from db
+        client_contact_persons_emails = []
+        for person in client_contact_persons:
+            client_contact_persons_emails.append(
+                ClientContactPersonEmail.objects.all().filter(contact_person_id=person.id))
+        context['client_contact_persons_emails'] = client_contact_persons_emails
 
         return context

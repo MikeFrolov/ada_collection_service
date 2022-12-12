@@ -1,0 +1,75 @@
+<!-- ==== Client phones ==== -->
+<div>
+    <h5 class="p-1 text-center bg-light">Контакти клієнта</h5><hr>
+    <!-- ==== Table with phones ==== -->
+    <div class="row g-2 container">
+        {% for phone in client_phones %}
+            <div class="p-1 col-lg-3 border border-2">
+                <div class="row g-2">
+                    <!-- Phone type -->
+                    <div class="col-lg-2">
+                        <b>{{ phone.type_phone|safe }}</b>
+                    </div>
+                    <!-- Phone field -->
+                    <div class="col-lg-4">
+                        {{ phone.phone|safe }}
+                    </div>
+                    <!-- Messengers -->
+                    <div class="col-lg-4">
+                        <div class="row g-2">
+                            <div class="col-lg-2">
+                                {% if phone.facetime == True %}
+                                    <a href="#">
+                                        <iconify-icon icon="icon-park-solid:facetime"></iconify-icon>
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="col-lg-2">
+                                {% if phone.signal == True %}
+                                    <a href="#">
+                                        <iconify-icon icon="icon-park:message-sent"></iconify-icon>
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="col-lg-2">
+                                {% if phone.telegram == True %}
+                                    <a href="#">
+                                        <iconify-icon icon="logos:telegram"></iconify-icon>
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="col-lg-2">
+                                {% if phone.viber == True %}
+                                    <a href="#">
+                                        <iconify-icon icon="fa-brands:viber"></iconify-icon>
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="col-lg-2">
+                                {% if phone.whatsapp == True %}
+                                    <a href="#">
+                                        <iconify-icon icon="logos:whatsapp-icon"></iconify-icon>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Phone verification -->
+                    <div class="col-lg-1">
+                        {% if phone.verification == "YES" %}
+                            <iconify-icon icon="ci:checkbox-checked" style="color: sky;"></iconify-icon>
+                        {% elif phone.verification == "NOT" %}
+                            <iconify-icon icon="ci:checkbox-checked" style="color: red;"></iconify-icon>
+                        {% endif %}
+                    </div>
+                    <!-- Edit phone -->
+                    <div class="col-lg-1 border-start">
+                        <a href="#">
+                            <iconify-icon icon="clarity:edit-line"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
