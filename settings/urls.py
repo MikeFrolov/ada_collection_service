@@ -26,4 +26,5 @@ urlpatterns = [
     path('', include('apps.contractor_managers.urls',)),
     path('', include('apps.contractors.urls')),
     path('', include('apps.debts.urls')),
+    path('', include('apps.communication.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -41,6 +41,7 @@ ROOT_APPS = [
     'apps.contractor_managers',
     'apps.clients',
     'apps.contacts',
+    'apps.communication',
     'apps.debts',
     'apps.adresses'
 ]
@@ -48,6 +49,8 @@ ROOT_APPS = [
 INSTALLED_APPS = [
     'jazzmin',  # Apdated design for admin panel "pip install -U django-jazzmin"
 
+    'crispy_forms',
+    'crispy_bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -148,3 +151,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# django-crispy-forms
+# https://django-crispy-forms.readthedocs.io/
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+# End django-crispy-forms

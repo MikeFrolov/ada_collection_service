@@ -1,0 +1,37 @@
+{% extends "base_v1.html" %}
+{% block title %}Форма створення комунікації{% endblock %}
+{% block page_title %}
+<!-- ==== Page title block ==== -->
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header opacity-75">
+            <div class="row">
+                <h5 class="text-center">Форма створення комунікації</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END page title block -->
+{% endblock %}
+{% block content %}
+{% if message %}
+    <p>{{ message }}</p>
+{% endif %}
+<!-- ==== Content block ==== -->
+<div class = "mt-5 d-flex justify-content-center">
+    <div class="container">
+        <form action="." method = "post">
+            {% csrf_token %}
+            <div class="row g-1">
+                {% for field in form %}
+                    {{ field }}
+                {% endfor %}
+            </div>
+        <button type = "submit" class = " btn btn-primary ">Зберегти</button>
+       </form>
+    </div>
+</div>
+<!-- END content block -->
+{% endblock %}
+<!--<input type="date" class="form-control"/> Форма введення дати-->

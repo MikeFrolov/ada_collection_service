@@ -88,4 +88,4 @@ class Debt(models.Model):
         self.save()
 
     def __str__(self):
-        return f"{self.id}, {self.origin_number}, {self.current_debt}грн, {self.client}"
+        return f"{self.id}: {self.client}"

@@ -115,7 +115,7 @@ class ClientContactPerson(Person):
     # Relations with client
     class RelationChoices(models.TextChoices):
         CR = "Близькі родичі", "Близькі родичі"
-        DR = "Далекі родичі", ""
+        DR = "Далекі родичі", "Далекі родичі"
         FR = "Друзі", "Друзі"
         CL = "Коллеги", "Коллеги"
         NG = "Сусіди", "Сусіди"
