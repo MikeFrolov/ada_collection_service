@@ -9,7 +9,7 @@ class CommunicationForm(forms.ModelForm):
 
     error_css_class = 'error-field'
     required_css_class = 'required-field'
-    comment = forms.CharField(widget=forms.Textarea(attrs={"rows": 3, "placeholder": "Коментар"}))
+    comment = forms.CharField(widget=forms.Textarea(attrs={"rows": 3, "placeholder": "Коментар/Текст"}))
 
     class Meta:
         model = Communication

@@ -874,7 +874,7 @@
                 <tbody>
                     {% for communication in communications %}
                     <tr>
-                        <td class="col-lg-0.5">{{ communication.date_time|date:"d.m.Y h:m:s" }}</td>
+                        <td class="col-lg-0.5">{{ communication.date_time|date:'d.m.Y H:i:s' }}</td>
                         <td class="col-lg-0.5">{{ communication.get_type_display|safe }}</td>
                         <td class="col-lg-0.5">{{ communication.get_action_display|safe }}</td>
                         <td class="col-lg-1.5">{{ communication.get_communication_channel_display|safe }}</td>

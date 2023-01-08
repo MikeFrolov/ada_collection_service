@@ -117,12 +117,11 @@ class DebtDetailView(FormMixin, DetailView):
 
         return context
 
-    """Added form in view template"""
-    # Communication form
+    """Added сommunication form in view template"""
     def post(self, request, *args, **kwargs):
-        # args['debt'] = Debt.objects.get(pk=debt_id)
         self.object = self.get_object()
         form = self.get_form()
+        form = CommunicationForm(request.POST, initial={'debt': Debt.objects.get(pk=kwargs.get('pk'))})
 
         if form.is_valid():
             print('Форма прошла валидацию')
@@ -130,8 +129,8 @@ class DebtDetailView(FormMixin, DetailView):
             self.pk = self.kwargs.get('pk')
             return super(DebtDetailView, self).form_valid(form)
         else:
+            print('Form does not saved!')
             return self.form_invalid(form)
 
     def get_success_url(self):
-        print(self.pk)
         return reverse('debt_detail', kwargs={'pk': self.pk})
