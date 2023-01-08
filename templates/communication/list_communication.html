@@ -1,0 +1,54 @@
+{% extends "base_v1.html" %}
+{% block title %}Історія комунікації{% endblock %}
+{% block page_title %}
+<!-- ==== Page title block ==== -->
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header opacity-75">
+            <div class="row">
+                <h5 class="text-center">Історія комунікації</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END page title block -->
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <table class="table table-bordered table-striped table-sm" id="example" style="text-align: center;">
+            <thead class="table-light">
+                <tr class="active">
+                    <th scope="col">Справа</th>
+                    <th scope="col">Дата/Час</th>
+                    <th scope="col">Тип комунікації</th>
+                    <th scope="col">Дія</th>
+                    <th scope="col">Канал звязку</th>
+                    <th scope="col">Деталі</th>
+                    <th scope="col">Контактна особа</th>
+                    <th scope="col">Результат</th>
+                    <th scope="col">Обіцяна сума погашення</th>
+                    <th scope="col">Обіцяна дата погашення</th>
+                    <th scope="col">Коментар/Текст</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for communication in communication_history %}
+                <tr>
+                    <td>{{ communication.debt.origin_number|safe  }}</td>
+                    <td>{{ communication.date_time|safe }}</td>
+                    <td>{{ communication.type|safe }}</td>
+                    <td>{{ communication.action|safe }}</td>
+                    <td>{{ communication.communication_channel|safe }}</td>
+                    <td>{{ communication.communication_detail|safe }}</td>
+                    <td>{{ communication.person|safe }}</td>
+                    <td>{{ communication.result|safe }}</td>
+                    <td>{{ communication.sum|safe }}</td>
+                    <td>{{ communication.pay_date|safe }}</td>
+                    <td>{{ communication.comment|safe }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

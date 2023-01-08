@@ -231,7 +231,6 @@
                 </div>
                 <!-- ==== Other debts ==== -->
                 <div class="col-lg-4">
-                    <!-- ==== Other debts ==== -->
                     <div class="col-lg-12">
                       <table class="table p-1">
                           <thead>
@@ -252,39 +251,6 @@
                       </table>
                     </div>
                 </div>
-                <!-- ==== Comments ==== -->
-                <div class="col-lg-12">
-                    <table class="table border">
-                      <thead class="text-center bg-light">
-                        <tr>
-                            <th><h6 class="col">Дата:</h6></th>
-                            <th><h6 class="col">Зв'язок через:</h6></th>
-                            <th><h6 class="col">Обіцянка:</h6></th>
-                            <th><h6 class="col text-center">Коментар:</h6></th>
-                      </thead>
-                      <tbody>
-                        <tr class="border">
-                            <td class="col-1 border">14.10.2022 14:02:43</td>
-                            <td class="col-2 border">Тел.дзвінок</td>
-                            <td class="col-2 border">Передадуть інформацію</td>
-                            <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
-                        </tr>
-                        <tr class="border">
-                            <td class="col-1 border">01.09.2022 10:28:23</td>
-                            <td class="col-2 border">Viber</td>
-                            <td class="col-2 border">Обіцянка оплати</td>
-                            <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
-                        </tr>
-                        <tr class="border">
-                            <td class="col-1 border">24.08.2022 17:21:33</td>
-                            <td class="col-2 border">Тел.дзвінок</td>
-                            <td class="col-2 border">Зайнятий</td>
-                            <td class="col-7 border">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla dolor non urna porttitor scelerisque. Ut eget faucibus eros, non porttitor dolor.</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                </div>
-                <!-- END Comments -->
             </div>
         </div>
         <!-- ==== TAB Debt ==== -->
@@ -866,7 +832,74 @@
         </div>
         <!-- ==== TAB Communication ==== -->
         <div class="tab-pane" id="communication">
-
+            <!-- ==== New communication form ==== -->
+            <p>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        Додати дані по комунікації
+                    </button>
+                </div>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <form class="container" method = "post">
+                        {% csrf_token %}
+                        <div class="row g-1">
+                            {{ form.as_table }}
+                            <!--{% for field in form %}
+                            <p>{{ field.label_tag }}{{ field }}</p>
+                            {% endfor %}-->
+                        </div>
+                        <button type = "submit" class = " btn btn-primary ">Зберегти</button>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <!-- ==== Communication history table ==== -->
+            <table class="table table-bordered table-striped  table-hover table-sm" id="example">
+                <thead class="table-secondary">
+                    <tr class="active">
+                        <th scope="col">Дата / Час</th>
+                        <th scope="col">Тип комунікації</th>
+                        <th scope="col">Дія</th>
+                        <th scope="col">Канал звязку</th>
+                        <th scope="col">Контактна особа</th>
+                        <th scope="col">Деталі</th>
+                        <th scope="col">Результат</th>
+                        <th scope="col">Обіцяна сума погашення</th>
+                        <th scope="col">Обіцяна дата погашення</th>
+                        <th scope="col">Коментар/Текст</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for communication in communications %}
+                    <tr>
+                        <td class="col-lg-0.5">{{ communication.date_time|date:'d.m.Y H:i:s' }}</td>
+                        <td class="col-lg-0.5">{{ communication.get_type_display|safe }}</td>
+                        <td class="col-lg-0.5">{{ communication.get_action_display|safe }}</td>
+                        <td class="col-lg-1.5">{{ communication.get_communication_channel_display|safe }}</td>
+                        <td class="col-lg-2"><b>{{ communication.person|safe }}</b></td>
+                        <td class="col-lg-1">{{ communication.communication_detail|safe }}</td>
+                        <td class="col-lg-1">{{ communication.get_result_display|safe }}</td>
+                        <td class="col-lg-0.5">
+                            {% if communication.sum == None %}
+                                -
+                            {% else %}
+                                {{ communication.sum|safe }}
+                            {% endif %}
+                        </td>
+                        <td class="col-lg-1">
+                            {% if communication.pay_date == None %}
+                                -
+                            {% else %}
+                                {{ communication.pay_date|safe }}
+                            {% endif %}
+                        </td>
+                        <td class="col-lg-3">{{ communication.comment|safe }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -1,9 +1,11 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import DetailView, ListView, TemplateView
-from django.views.generic.edit import CreateView
-from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, FormMixin
+from django.urls import reverse, reverse_lazy
+from django.utils import formats
 from datetime import date
 import numpy as np
 from .fields import create_form_fields
@@ -11,6 +13,8 @@ from .models import Debt
 from apps.adresses.models import ClientAddress
 from apps.clients.models import Client, ClientContactPerson, ClientStatuses, ClientSocialNetworks
 from apps.contacts.models import ClientEmail, ClientContactPersonEmail, ClientContactPersonPhone, ClientPhone
+from apps.communication.models import Communication
+from apps.communication.forms import CommunicationForm
 
 
 def get_age(born_date: date) -> int:
@@ -44,14 +48,22 @@ class CreateDebtFormView(CreateView):  # Fixme: add 'LoginRequiredMixin, ' in fi
     success_url = reverse_lazy('list_debts')
 
 
-class DebtDetailView(DetailView):
+class DebtDetailView(FormMixin, DetailView):
+
     model = Debt
     template_name = 'debts/debt_detail.html'
+    form_class = CommunicationForm
+    pk = None
+    # success_url = 'debts/debt_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(DebtDetailView, self).get_context_data(**kwargs)
+
         debt = Debt.objects.get(pk=self.kwargs.get('pk'))  # get client data from db
+        context['debt'] = debt  # add debt to context
+
         client = debt.client  # get client from pk(request)
+        context['client'] = client  # add client to context
 
         context['client_age'] = get_age(debt.client.date_of_birth)  # calculate client age from birthdate
 
@@ -96,4 +108,29 @@ class DebtDetailView(DetailView):
                 ClientContactPersonEmail.objects.all().filter(contact_person_id=person.id))
         context['client_contact_persons_emails'] = client_contact_persons_emails
 
+        # Get communication for debt from db
+        communications = Communication.objects.all().filter(debt=debt).order_by('-date_time')
+        context['communications'] = communications
+
+        # Get communication form
+        context['form'] = self.get_form()
+
         return context
+
+    """Added сommunication form in view template"""
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        form = CommunicationForm(request.POST, initial={'debt': Debt.objects.get(pk=kwargs.get('pk'))})
+
+        if form.is_valid():
+            print('Форма прошла валидацию')
+            form.save()
+            self.pk = self.kwargs.get('pk')
+            return super(DebtDetailView, self).form_valid(form)
+        else:
+            print('Form does not saved!')
+            return self.form_invalid(form)
+
+    def get_success_url(self):
+        return reverse('debt_detail', kwargs={'pk': self.pk})
